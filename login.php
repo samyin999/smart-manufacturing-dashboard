@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 session_start();
 require_once 'includes/config.php';
 require_once 'includes/db_connect.php';
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Invalid username or password";
     }
 }
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="en">
