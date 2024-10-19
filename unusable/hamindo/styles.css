@@ -1,0 +1,503 @@
+/* images css*/
+.MainPageLogo {
+    width: 150px;
+    margin-top: 25px;
+}
+
+.workerLogo {
+    width: 100px;
+    position: fixed;
+    top: 1px;
+    right: 960px;
+    margin-top: 50px;
+}
+.monitorPerformance {
+    width: 50px;
+    position: fixed;
+    top: 205px;
+    right: 770px;
+    margin-top: 50px;
+}
+.manageMachines {
+    width: 50px;
+    position: fixed;
+    top: 285px;
+    right: 770px;
+    margin-top: 50px;
+}
+.manageJobs {
+    width: 50px;
+    position: fixed;
+    top: 365px;
+    right: 770px;
+    margin-top: 50px;
+}
+.mangeProductionOperator {
+    width: 50px;
+    position: fixed;
+    top: 450px;
+    right: 770px;
+    margin-top: 50px;
+}
+.dashboardCompanyLogo{
+    width: 150px;
+    position: fixed;
+    top: 330px;
+    right: 490px;
+    margin-top: 50px;
+}
+.profile{
+    width: 45px;
+    height: 40px;
+    position: fixed;
+    top: 1px;
+    right: 540px;
+    margin-top: 68px;
+}
+
+.dashboardHomeLogo {    
+    width: 65px;
+    height: 60px;
+    position: fixed;
+    top: 1px;
+    right: 475px;
+    margin-top: 60px;
+
+}
+
+/* images css*/
+
+
+
+
+
+
+
+#dashboardSettingButton{
+    width: 100px;
+    padding: 15px;
+    margin: 10px;
+    height:10px ;
+    position: fixed;
+    top: 55px;
+    font-size: 16px;
+    right: 750px;
+
+}
+#dashboardLogoutButton{
+    width: 100px;
+    padding: 15px;
+    margin: 10px;
+    height:10px ;
+    position: fixed;
+    top: 55px;
+    font-size: 16px;
+    right: 600px;
+
+}
+
+
+
+
+
+
+
+ /* dashboard*/
+ .dashboardContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+ .dashboardHelp {
+    margin-left: 450px;
+ /* dashboard*/
+
+
+
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+ /* index */
+.indexContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* index */
+
+
+
+
+
+
+/* worker */
+.workerContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* worker */
+
+h1, h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.role-buttons {
+    margin-top: 20px;
+}
+
+button {
+    width: 200px;
+    padding: 15px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+.header {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-left h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.header-right .button {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s;
+}
+
+.header-right .button:hover {
+    background-color: #ddd;
+}
+
+.content {
+    padding: 20px;
+}
+
+.notice {
+    background-color: #ffeb3b;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.status {
+    background-color: #e0f7fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.operations {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.operation-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.operation-button:hover {
+    background-color: #0056b3;
+}
+
+.help-section {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.help-section .button {
+    text-decoration: none;
+    color: #007bff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #e3f2fd;
+    border: 1px solid #007bff;
+    transition: background-color 0.3s;
+}
+
+.help-section .button:hover {
+    background-color: #bbdefb;
+}
+
+
+
+
+
+
+
+
+
+
+
+*{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.display-page{
+    height: 75vh;
+    width:100%;
+}
+.secondary-nav{
+    display:flex;
+    justify-content: space-between;
+    margin:5vmin 10vmin 0vmin 10vmin;
+    align-items: center;
+    border-bottom: 0.3vmin solid #000;
+}
+h1{
+    font-size: 3vmin;
+}
+.secondary-nav-logo{
+    width:10vmin;
+}
+.login-prompt{
+    display:flex;
+    flex-direction: column;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    gap: 8vmin;
+}
+#user-name-login{
+    font-size: 6vmin;
+}
+.user-password-login{
+    width:65vmin;
+    padding: 3vmin;
+    text-align: center;
+    color: #9b9b9b;
+    font-size:3vmin;
+    border-radius:18px;
+}
+.login-inline{
+    width:65vmin;
+    display: flex;
+    justify-content: space-between;
+}
+.login-button, .switch-user-button{
+    border:none;
+    padding: 3vmin;
+    width:20vmin;
+    font-size:2vmin;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 18px;
+}
+button:hover{
+    cursor: pointer;
+    animation: scale-animation 2s ease infinite;
+}
+.login-button{
+    background-color: #00ccff;
+}
+.switch-user-button{
+    background-color: #b3b3b3;
+    
+}
+.nav-container{
+    display:flex;
+    border-bottom: 0.3vmin solid #000;
+    justify-content: space-between;
+    padding: 3vmin;
+    margin:2vmin 2vmin 0 2vmin;
+}
+.nav-icon{
+    width:4vmin;
+    margin:0 2vmin 0 2vmin;
+}
+
+.top-subtitle{
+    display:flex;
+    align-items: center;
+    margin:5vmin;
+    gap: 2vmin;
+}
+h3{
+    color:#9b9b9b;
+    font-size:3vmin;
+    font-weight:normal;
+}
+h4{
+    font-weight:normal;
+    font-size:3vmin;
+}
+.middle-container{
+    margin-top:10vmin;
+    display:flex;
+    justify-content: space-evenly;
+}
+.attribute-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color:#000;
+    font-weight: bold;
+    font-size: 2vmin;
+}
+.attribute-container:hover{
+    animation: scale-animation 2s ease infinite;
+    cursor: pointer;
+}
+.attribute-icon{
+    width:25vmin;
+    margin-bottom:3vmin;
+}
+.bottom-container{
+    position: fixed;
+    bottom:0;
+    width:95vw;
+    margin:0 5vmin 2vmin 5vmin;   
+}
+.bottom-container div{
+    width:100%; 
+    display:flex; 
+    gap:10vmin;
+    align-items: inherit;
+}
+.footer-manufacture-logo{
+    width:10vmin;
+}
+.footer-button{
+    padding:2.5vmin;
+    width:15vmin;
+    border: none;
+    border-radius: 12px;
+    background-color: #00ccff;
+    color: #fff;
+    font-weight:bold;
+    font-size:2vmin;
+}
+#help-button{
+    background-color:#9b9b9b;
+    position:absolute;
+    right:0;
+}
+
+.x-track{
+    display:flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+    margin:10vh 10vw 0 10vw;
+    max-height:45vh;
+    gap: 2vh;
+    overflow-y: scroll;
+    scrollbar-color: #000 #fff;
+}
+.job-pointer{
+    border:1px solid black;
+    padding:4vmin;
+    font-size:3vmin;
+    width:80%;
+    text-align: center;
+    border-radius: 18px;
+    text-decoration: none;
+    color:#000;
+}
+.job-pointer:hover{
+    cursor: pointer;
+}
+#left-job-container{
+    border:1px solid black;
+    display:flex;
+    flex-direction: column;
+    height:50vmin;
+    width:30vmin;
+    align-items: center;
+    gap:10vh;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    border-right:none;
+}
+#left-job-container div div{
+    font-size:2vmin;
+    width:20vmin;
+    justify-content: space-between;
+    display:flex;
+    margin-top:2vh;
+}
+#left-job-container div div input{
+    width:3vmin;
+}
+
+#right-job-container{
+    border:1px solid black;
+    width:70vw;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+#right-job-container h4{
+    margin:2vmin;
+}
+#right-job-container input{
+    margin-left:2vmin;
+    height:70%;
+    width:95%;
+    border-radius: 18px;
+    text-align: left;
+}
+
+@keyframes scale-animation{
+    0%{scale:0.98;}
+    50%{scale:1;}
+    100%{scale:0.98;}
+}

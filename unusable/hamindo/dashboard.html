@@ -1,0 +1,48 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Hamido">
+    <title>Worker Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboardContainer">
+    <div class="header">
+        <div class="header-left">
+            <h2>Welcome <span id="workerName"></span></h2>
+        </div>
+        <div class="header-right">
+            <a href="index.html" class="button" id="dashboardLogoutButton">Logout</a>
+            <a href="index.html" class="button" id="dashboardSettingButton">Settings</a>
+            <a href="index.html"  id="dashProfile"><img src="image/profile.png" class="profile" alt="profile"></a>
+            <a href="index.html"  id="dashHomelogo"><img src="image/homeLogo.png" class="dashboardHomeLogo" alt="dashboardHomeLogo"></a>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="notice">
+            <p>Company notices: Fire drill today at 3:00PM ACST</p>
+        </div>
+        <p>Systems operational</p>
+        <p>Tempreture normal</p>
+        <div class="operations">
+            <button class="operation-button">Monitor factory performance</button><img src="image/monitorPerformance.png" class="monitorPerformance" alt="monitorPerformance">
+            <button class="operation-button">Manage machines</button><img src="image/manageMachines.png" class="manageMachines" alt="manageMachines">
+            <button class="operation-button">Manage jobs</button><img src="image/manageJobs.png" class="manageJobs" alt="manageJobs">
+            <button class="operation-button">Manage Production Operators</button><img src="image/mangeProductionOperator.png" class="mangeProductionOperator" alt="mangeProductionOperator">
+            <img src="image/MainLogo.png" class="dashboardCompanyLogo" alt="dashboardCompanyLogo">
+        </div>
+        <div class="dashboardHelp">
+        <p> <a href="index.html">Get Help</a></p>
+    </div>
+    </div>
+</div>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
