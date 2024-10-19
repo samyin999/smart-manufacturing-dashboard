@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Hamido">
+    <title>Smart Manufacturing Dashboard (SMD)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="indexContainer">
+        <h1>Welcome to the Smart Manufacturing Dashboard</h1>
+        <img src="image/MainLogo.png" class="MainPageLogo" alt="Main Logo">
+        <p>Please select your role to continue:</p>
+
+        <div class="role-buttons">
+            <button onclick="redirectToWorkers('administrator')">Administrator</button><br>
+            <button onclick="redirectToWorkers('factoryManager')">Factory Manager</button><br>
+            <button onclick="redirectToWorkers('productionOperator')">Production Operator</button><br>
+            <button onclick="redirectToWorkers('auditor')">Auditor</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
