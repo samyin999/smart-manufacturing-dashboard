@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Manager Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+        }
+        .header h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .header img {
+            width: 80px;
+        }
+        .login-content {
+            margin-top: 40px;
+        }
+        .login-content h2 {
+            font-size: 22px;
+        }
+        input[type="password"] {
+            padding: 10px;
+            width: 200px;
+            margin-bottom: 20px;
+        }
+        .login-btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .login-btn:hover {
+            background-color: #555;
+        }
+        .change-user {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .change-user a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h3>Factory Manager</h3>
+        <img src="/mnt/data/logo.png" alt="Manufacturing Logo">
+    </div>
+
+    <div class="login-content">
+        <h2>Bob Johnson</h2>
+        <form action="login.php" method="POST" onsubmit="return validateForm()">
+            <input type="password" name="password" id="password" placeholder="Enter password" required>
+            <br>
+            <button type="submit" class="login-btn">LOGIN</button>
+        </form>
+        <div class="change-user">
+            <p>Not you? <a href="#">Click here</a> to change</p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var password = document.getElementById("password").value;
+            if (password === "") {
+                alert("Please enter your password.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</body>
+</html>
