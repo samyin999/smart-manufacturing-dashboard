@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Manager Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: left;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header h3 {
+            margin: 0;
+        }
+        .profile {
+            text-align: right;
+        }
+        .profile p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .profile img {
+            width: 40px;
+            border-radius: 50%;
+        }
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .left-content {
+            width: 60%;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            background-color: #e0e0e0;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button img {
+            width: 20px;
+            height: 20px;
+        }
+        .right-content {
+            width: 20%;
+            text-align: center;
+        }
+        .right-content img {
+            width: 100px;
+        }
+        .footer {
+            text-align: right;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h3>Factory Manager: Bob Johnson</h3>
+        <div class="profile">
+            <p>Settings | Logout</p>
+            <img src="/mnt/data/logo.png" alt="Profile">
+        </div>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <!-- Left Section -->
+        <div class="left-content">
+            <p><strong>Company notices:</strong> Fire drill today at 3:00PM ACST</p>
+            <p>Systems operational</p>
+            <p>Temperature normal</p>
+            <div class="buttons">
+                <button>Monitor factory performance <img src="https://img.icons8.com/ios/50/000000/speedometer.png" alt="icon"></button>
+                <button>Manage machines <img src="https://img.icons8.com/ios/50/000000/factory.png" alt="icon"></button>
+                <button>Manage jobs <img src="https://img.icons8.com/ios/50/000000/job.png" alt="icon"></button>
+                <button>Manage Production Operators <img src="https://img.icons8.com/ios/50/000000/teamwork.png" alt="icon"></button>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-content">
+            <img src="/mnt/data/logo.png" alt="Manufacturing Logo">
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>Get Help</p>
+    </div>
+
+</body>
+</html>
