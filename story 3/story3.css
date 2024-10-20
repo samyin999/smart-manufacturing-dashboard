@@ -1,0 +1,81 @@
+*{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.display-page{
+    height: 75vh;
+    width:100%;
+}
+.secondary-nav{
+    display:flex;
+    justify-content: space-between;
+    margin:5vmin 10vmin 0vmin 10vmin;
+    align-items: center;
+    border-bottom: 0.3vmin solid #000;
+}
+h1{
+    font-size: 3vmin;
+}
+.secondary-nav-logo{
+    width:10vmin;
+}
+.login-prompt{
+    display:flex;
+    flex-direction: column;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    gap: 8vmin;
+}
+#user-name-login{
+    font-size: 6vmin;
+}
+.user-password-login{
+    width:65vmin;
+    padding: 3vmin;
+    text-align: center;
+    color: #9b9b9b;
+    font-size:3vmin;
+    border-radius:18px;
+}
+.login-inline{
+    width:65vmin;
+    display: flex;
+    justify-content: space-between;
+}
+.login-button, .switch-user-button{
+    border:none;
+    padding: 3vmin;
+    width:20vmin;
+    font-size:2vmin;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 18px;
+}
+button:hover{
+    cursor: pointer;
+    animation: scale-animation 2s ease infinite;
+}
+.login-button{
+    background-color: #00ccff;
+}
+.switch-user-button{
+    background-color: #b3b3b3;
+
+}
+.nav-container{
+    display:flex;
+    border-bottom: 0.3vmin solid #000;
+    justify-content: space-between;
+    padding: 3vmin;
+    margin:2vmin 2vmin 0 2vmin;
+}
+.nav-icon{
+    width:4vmin;
+    margin:0 2vmin 0 2vmin;
+}
+@keyframes scale-animation{
+    0%{scale:0.98;}
+    50%{scale:1;}
+    100%{scale:0.98;}
+}
