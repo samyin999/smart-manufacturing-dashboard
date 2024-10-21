@@ -7,7 +7,8 @@ $stmt = $pdo->query("SELECT * FROM users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Function to safely output HTML
-function h($string) {
+function h($string)
+{
     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
 ?>
@@ -80,7 +81,7 @@ function h($string) {
                     <li>Temperature nominal</li>
                 </ul>
             </div>
-            
+
             <br><br>
 
             <button class="rounded-button" id="database-button">User database GUI</button>
@@ -89,8 +90,31 @@ function h($string) {
 
         <!-- page 2 database -->
         <section class="display-page" id="admin-database" style="display:none">
-            <h1>placeholder</h1>
-            <button>placeholder button</button>
+            <h2>User Database</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Category</th>
+                        <th>Role</th>
+                        <th>Full Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($users as $user): ?>
+                        <tr>
+                            <td><?php echo h($user['id']); ?></td>
+                            <td><?php echo h($user['username']); ?></td>
+                            <td><?php echo h($user['category']); ?></td>
+                            <td><?php echo h($user['role']); ?></td>
+                            <td><?php echo h($user['full_name']); ?></td>
+                            <td><?php echo h($user['description']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </section>
 
     </main>
