@@ -1,3 +1,17 @@
+<?php
+// Include database connection
+require_once 'includes/db_connect.php';
+
+// Fetch all users from the database
+$stmt = $pdo->query("SELECT * FROM users");
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Function to safely output HTML
+function h($string) {
+    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

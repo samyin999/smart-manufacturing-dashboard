@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
-    // same logic should be fine with all user types
-    // if(window.location.pathname.endsWith('operatorIndex.html')){
+    
+    // Operators logic
+    if(window.location.pathname.endsWith('operatorIndex.html')){
         const displayMain = document.getElementById('main-page');
         const displayMainNav = document.getElementById('primary-nav-container');
         const displayFooter = document.getElementById('footer-container');
@@ -88,7 +89,38 @@ document.addEventListener('DOMContentLoaded', function(){
         function updateMachinePage(){
 
         }
-    // } end brack for if operatorIndex
+    }
+
+    // Admin logic
+    if(window.location.pathname.endsWith('adminIndex.html')){
+        
+        //borrowed logic from Pete's implementation
+        const displayMain = document.getElementById('main-page');
+        const displayMainNav = document.getElementById('primary-nav-container');
+        const displayFooter = document.getElementById('footer-container');
+
+        console.log(`Found Document ${window.location.pathname}`);
+        
+        // Sam's implementation
+        const displayLanding = document.getElementById('landing-page');
+        const displayDatabase = document.getElementById('admin-database');
+
+        document.getElementById('login-button').addEventListener('click', function(){
+            //AND CHECK WITH DATABASE IF PASSWORD===PASSWORD
+            displayMain.style.display='none';
+            const username=document.getElementById('user-name-login').textContent;
+            document.getElementById('nav-title').textContent=`Production Operator : ${username}`;
+            displayLanding.style.display='block';
+            displayMainNav.style.display='block';
+            displayFooter.style.display='block';
+        })
+
+        document.getElementById('database-button').addEventListener('click', function(){
+            displayLanding.style.display='none';
+            displayDatabase.style.display='block';
+        });
+
+    }
 });
 
 // Ajay's Javascript
