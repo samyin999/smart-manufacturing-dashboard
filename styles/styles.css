@@ -1,3 +1,5 @@
+/* Pete's CSS */
+
 *{
     margin:0;
     font-family: Arial, Helvetica, sans-serif;
@@ -211,4 +213,28 @@ h4{
     0%{scale:0.98;}
     50%{scale:1;}
     100%{scale:0.98;}
+}
+
+/* Sam's CSS */
+.rounded-buttona {
+    border: 1px solid black;
+    padding: 2vmin 4vmin;  /* Adjust padding: 2vmin vertically, 4vmin horizontally */
+    font-size: 3vmin;
+    width: auto;  /* Set width to auto to allow the button to size based on content */
+    text-align: center;
+    border-radius: 18px;
+    text-decoration: none;
+    color: #000;
+    display: inline-block; /* Ensure it doesn't take up full width */
+}
+
+.rounded-button{
+    border:1px solid black;
+    padding:4vmin;
+    font-size:3vmin;
+    width:30%;
+    text-align: center;
+    border-radius: 18px;
+    text-decoration: none;
+    color:#000;
 }

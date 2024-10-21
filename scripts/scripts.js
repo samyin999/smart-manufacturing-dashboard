@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
-    if(window.location.pathname.endsWith('productionIndex.html')){
+    // same logic should be fine with all user types
+    // if(window.location.pathname.endsWith('operatorIndex.html')){
         const displayMain = document.getElementById('main-page');
         const displayMainNav = document.getElementById('primary-nav-container');
         const displayFooter = document.getElementById('footer-container');
@@ -21,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function(){
             pageTransition(1,0,0);
             
         })
-
 
         document.querySelectorAll('.attribute-container').forEach(function(button){
             button.addEventListener('click', function(event){
@@ -88,11 +88,10 @@ document.addEventListener('DOMContentLoaded', function(){
         function updateMachinePage(){
 
         }
-    }
+    // } end brack for if operatorIndex
 });
 
 // Ajay's Javascript
-
 
 function showPage(hideId, showId) {
     document.getElementById(hideId).style.display = 'none';

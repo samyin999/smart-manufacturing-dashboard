@@ -10,11 +10,9 @@
 </head>
 <body>
     <main>
+        <!-- page 1 -->
         <section class="display-page" id="main-page" style="display:block">
-            <nav class="secondary-nav">
-                <h1 id="employee-title">Production Operator</h1>
-                <img class="secondary-nav-logo" src="images/manufactoring-logo.png" alt="manufactoring-logo">
-            </nav>
+
             <div class="login-prompt">
                 <h2 id="user-name-login"> <!--To be linked from main.html when signing in-->
                     Rajit Sharma
@@ -26,6 +24,8 @@
                 </div>
             </div> 
         </section>
+
+        <!-- nav bar -->
         <nav class="primary-nav" id="primary-nav-container"style="display:none">
             <nav class="nav-container">
                 <h1 id="nav-title">Production Operator : ${name}</h1>
@@ -34,8 +34,9 @@
                     <img class="nav-icon" src="images/user-icon.png" alt="user-icon"> <!--What even is the use of user-icon what page would it link to-->
                 </span>
             </nav>
-            
         </nav>
+
+        <!-- page 1 -->
         <section class="display-page" id="attribute-page" style="display:none">
             <div class="top-subtitle">
                 <h3>Company notice: </h3>
@@ -50,6 +51,7 @@
             </div>
         </section>
 
+        <!-- page 2 -->
         <section class="display-page" id="job-page" style="display:none">
             <div class="x-track"> <!--Data to be extracted from database-->
                 <ul class="job-pointer">Job: CNC Machine Inspection</ul>
@@ -60,6 +62,8 @@
             
             </div>
         </section>
+
+        <!-- page 3 -->
         <section class="display-page" id="current-job-page" style="display:none">
             <div class="top-subtitle">
                 <h3>Job: </h3>
@@ -81,10 +85,7 @@
                             <label for="completed">Completed</label>
                             <input type="checkbox" name="completed" id="completed">
                         </div>
-                        
-                        
                     </div>
-                    
 
                 </div>
                 <div id="right-job-container">
@@ -102,6 +103,8 @@
                 <button class="footer-button" id="help-button">Help</button> <!--What is this for-->
             </div>
         </footer>
+
+        
     </main>
 
     <script type="text/javascript" src="scripts/scripts.js"></script>

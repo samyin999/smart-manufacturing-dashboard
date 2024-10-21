@@ -1,43 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Interface</title>
+    <meta name="description" content="Admin index/login page">
+    <link rel="stylesheet" href="styles/styles.css" type="text/css">
+    <title>Admin Index page</title>
 </head>
+
 <body>
-    <header>
-        <img src="manufacturing-logo.png" alt="Manufacturing logo">
-        <div>
-            <span>Administrator: Johnny Admin</span>
-            <img src="user-icon.png" alt="User icon">
-        </div>
-    </header>
-
     <main>
-        <section>
-            <h2>Company notices:</h2>
-            <p>Fire drill today at 3:00PM ACST</p>
+
+        <!-- login -->
+
+        <section class="display-page" id="main-page" style="display:block">
+
+            <div class="login-prompt">
+                <h2 id="user-name-login"> <!--To be linked from main.html when signing in-->
+                    Johnny Admin
+                </h2>
+                <input class="user-password-login" type="form" name="userPasswordLogin"
+                    placeholder="Enter Password" /><!--Check with database for correct entry-->
+                <div class="login-inline">
+                    <a href="main.php"><button class="switch-user-button">Different
+                            User</button></a><!--TODO LINK TO MAIN-PAGE-->
+                    <button class="login-button" id="login-button">Login</button>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <h2>Network Information:</h2>
-            <ul>
-                <li>Global internet connection: Online</li>
-                <li>Local information hubs: Online</li>
-                <li>2 managers currently on shift</li>
-                <li>44 operators currently on shift</li>
-                <li>Systems operational</li>
-                <li>Temperature nominal</li>
-            </ul>
+        <!-- nav bar -->
+        <nav class="primary-nav" id="primary-nav-container" style="display:none">
+            <nav class="nav-container">
+                <h1 id="nav-title">Administrator : ${name}</h1>
+                <span>
+                    <a href="main.php"><img class="nav-icon" src="images/logout.png" alt="logout-icon"></a>
+                    <!--main.html required for link-->
+                    <img class="nav-icon" src="images/user-icon.png" alt="user-icon">
+                    <!--What even is the use of user-icon what page would it link to-->
+                </span>
+            </nav>
+        </nav>
+
+        <!-- page 1 -->
+
+        <section class="display-page" id="attribute-page" style="display:none">
+            <div class="top-subtitle">
+                <h3>Company notices: </h3>
+                <h4>Fire drill today at 3:00PM ACST</h4>
+
+            </div>
+
+            <div class="top-subtitle">
+                <h2>Network Information:</h2>
+            </div>
+
+            <div>
+                <ul>
+                    <li>Global internet connection: Online</li>
+                    <li>Local information hubs: Online</li>
+                    <li>2 managers currently on shift</li>
+                    <li>44 operators currently on shift</li>
+                    <li>Systems operational</li>
+                    <li>Temperature nominal</li>
+                </ul>
+            </div>
+            
+            <br><br>
+
+            <button class="rounded-button"></button>
+
+            <section class="display-page" id="attribute-page" style="display:none">
+
+            </section>
         </section>
 
-        <section>
-            <h2>Other information goes here</h2>
-            <input type="text" placeholder="Enter company KPI">
-        </section>
+        <!-- <section class="display-page" id="attribute-page" style="display:none">
+            <section>
+                <h2>Company notices:</h2>
+                <p>Fire drill today at 3:00PM ACST</p>
+            </section>
+    
+            <section>
+                <h2>Network Information:</h2>
+                <ul>
+                    <li>Global internet connection: Online</li>
+                    <li>Local information hubs: Online</li>
+                    <li>2 managers currently on shift</li>
+                    <li>44 operators currently on shift</li>
+                    <li>Systems operational</li>
+                    <li>Temperature nominal</li>
+                </ul>
+            </section>
+        </section> -->
     </main>
 
+
+    <!-- random ass table 
     <aside>
         <h2>User Database</h2>
         <table>
@@ -60,9 +121,10 @@
                     <td>Operator</td>
                     <td>Line Operator</td>
                 </tr>
-                <!-- Add more rows as needed -->
             </tbody>
         </table>
-    </aside>
+    </aside> -->
+    <script type="text/javascript" src="scripts/scripts.js"></script>
 </body>
+
 </html>
