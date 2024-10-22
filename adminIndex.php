@@ -106,10 +106,9 @@ function h($string)
                     <?php foreach ($users as $user): ?>
                         <tr>
                             <td><?php echo h($user['id']); ?></td>
-                            <td><?php echo h($user['username']); ?></td>
-                            <td><?php echo h($user['category']); ?></td>
+                            <td><?php echo h($user['name']); ?></td>
                             <td><?php echo h($user['role']); ?></td>
-                            <td><?php echo h($user['full_name']); ?></td>
+                            <td><?php echo h($user['job']); ?></td>
                             <td><?php echo h($user['description']); ?></td>
                         </tr>
                     <?php endforeach; ?>

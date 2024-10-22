@@ -102,23 +102,71 @@ document.addEventListener('DOMContentLoaded', function(){
         console.log(`Found Document ${window.location.pathname}`);
         
         // Sam's implementation
-        const displayLanding = document.getElementById('landing-page');
-        const displayDatabase = document.getElementById('admin-database');
 
-        document.getElementById('login-button').addEventListener('click', function(){
-            //AND CHECK WITH DATABASE IF PASSWORD===PASSWORD
-            displayMain.style.display='none';
-            const username=document.getElementById('user-name-login').textContent;
-            document.getElementById('nav-title').textContent=`Production Operator : ${username}`;
-            displayLanding.style.display='block';
-            displayMainNav.style.display='block';
-            displayFooter.style.display='block';
-        })
-
-        document.getElementById('database-button').addEventListener('click', function(){
-            displayLanding.style.display='none';
-            displayDatabase.style.display='block';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cache DOM elements
+            const displayMain = document.getElementById('main-page');
+            const displayMainNav = document.getElementById('primary-nav-container');
+            const displayLanding = document.getElementById('landing-page');
+            const displayDatabase = document.getElementById('admin-database');
+            const loginButton = document.getElementById('login-button');
+            const databaseButton = document.getElementById('database-button');
+        
+            // Check if elements exist to prevent null reference errors
+            if (!displayMain || !displayMainNav || !displayLanding || !displayDatabase) {
+                console.error('One or more required elements not found');
+                return;
+            }
+        
+            // Login button click handler
+            loginButton.addEventListener('click', function() {
+                // Get username and password
+                const username = document.getElementById('user-name-login');
+                const passwordInput = document.querySelector('.user-password-login');
+                
+                if (!username || !passwordInput) {
+                    console.error('Username or password elements not found');
+                    return;
+                }
+        
+                // TODO: Add actual password validation here
+                // For demo purposes, always proceed
+                
+                // Hide login page
+                displayMain.style.display = 'none';
+                
+                // Update nav title and show other elements
+                document.getElementById('nav-title').textContent = 
+                    `Administrator: ${username.textContent.trim()}`;
+                
+                displayMainNav.style.display = 'block';
+                displayLanding.style.display = 'block';
+            });
+        
+            // Database button click handler
+            databaseButton.addEventListener('click', function() {
+                displayLanding.style.display = 'none';
+                displayDatabase.style.display = 'block';
+            });
         });
+
+        // const displayLanding = document.getElementById('landing-page');
+        // const displayDatabase = document.getElementById('admin-database');
+
+        // document.getElementById('login-button').addEventListener('click', function(){
+        //     //AND CHECK WITH DATABASE IF PASSWORD===PASSWORD
+        //     displayMain.style.display='none';
+        //     const username=document.getElementById('user-name-login').textContent;
+        //     document.getElementById('nav-title').textContent=`Production Operator : ${username}`;
+        //     displayLanding.style.display='block';
+        //     displayMainNav.style.display='block';
+        //     displayFooter.style.display='block';
+        // })
+
+        // document.getElementById('database-button').addEventListener('click', function(){
+        //     displayLanding.style.display='none';
+        //     displayDatabase.style.display='block';
+        // });
 
     }
 });
