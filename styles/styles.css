@@ -216,18 +216,6 @@ h4{
 }
 
 /* Sam's CSS */
-.rounded-buttona {
-    border: 1px solid black;
-    padding: 2vmin 4vmin;  /* Adjust padding: 2vmin vertically, 4vmin horizontally */
-    font-size: 3vmin;
-    width: auto;  /* Set width to auto to allow the button to size based on content */
-    text-align: center;
-    border-radius: 18px;
-    text-decoration: none;
-    color: #000;
-    display: inline-block; /* Ensure it doesn't take up full width */
-}
-
 .rounded-button{
     border:1px solid black;
     padding:4vmin;
@@ -238,4 +226,8 @@ h4{
     text-decoration: none;
     color:#000;
     margin: 10px 20px 5px 15px;
+}
+
+.hidden {
+    display: none;
 }

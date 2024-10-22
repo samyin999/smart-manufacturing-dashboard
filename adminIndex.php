@@ -81,7 +81,7 @@ function h($string)
                     <li>Temperature nominal</li>
                 </ul>
             </div>
-
+            
             <br><br>
 
             <button class="rounded-button" id="database-button">User database GUI</button>
@@ -105,7 +105,6 @@ function h($string)
                 <tbody>
                     <?php foreach ($users as $user): ?>
                         <tr>
-                            <td><?php echo h($user['id']); ?></td>
                             <td><?php echo h($user['name']); ?></td>
                             <td><?php echo h($user['role']); ?></td>
                             <td><?php echo h($user['job']); ?></td>
