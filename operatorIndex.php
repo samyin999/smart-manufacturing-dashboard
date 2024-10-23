@@ -1,41 +1,37 @@
 <?php
-// session_start();
-// //WIP
-// $_SESSION['employeeID'] = 1;
-
-// // Include database connection
-// require_once 'includes/db_connect.php';
-
-// // Fetch all users from the database
-// $stmt = $pdo->query("SELECT * FROM users");
-// $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// // Function to safely output HTML
-// function h($string)
-// {
-//     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-// }
-
-// try {
-//     $stmt = $pdo->prepare("
-//         SELECT jobs.id, jobs.name, jobs.status, 
-//                machines.name as machine_name
-//         FROM jobs
-//         JOIN machines ON jobs.machine = machines.id
-//         ORDER BY jobs.id DESC
-//     ");
-//     $stmt->execute();
-//     $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// } catch (PDOException $e) {
-//     error_log("Error fetching jobs: " . $e->getMessage());
-//     $jobs = [];
-// }
-
 require_once 'includes/db_connect.php';
 
 // Turn on error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+// Pete's code, commented out code = doesn't work
+session_start();
+
+// $conn = mysqli_connect('localhost', 'dbamin', '', 'productiondb');
+// if (!$conn) {
+//     die("Connection failed: " . mysqli_connect_error());
+// }
+
+$receivedID = 1; #NOTE THIS MUST BE RECEIVED AND BE pre-PROCESSED TO ENSURE NO INJECTION ATTACKS
+$_SESSION['employeeId'] = $receivedID;
+
+// $name = "SELECT name FROM users WHERE user_id=$receivedID;";
+// $result = mysqli_query($conn, $name);
+// $row = mysqli_fetch_assoc($result);
+// $fullName = ($row['name'] . ' ' . $row['lastName']);
+
+// $jobQueryStmt = $conn->prepare("SELECT jobID, jobName, jobNote, jobStatus FROM jobList WHERE employeeID = ?");
+// $jobQueryStmt->bind_param("i", $receivedID);
+// $jobQueryStmt->execute();
+// $jobResult = $jobQueryStmt->get_result();
+
+// Below is what ended up working for me
+
+$stmt = $pdo->prepare("SELECT name FROM users WHERE user_id = ?");
+$stmt->execute([$receivedID]);
+$result = $stmt->fetch();
+$name = $result['name'] ?? 'User not found'; //
 
 try {
     // Get both jobs and machines
@@ -68,13 +64,21 @@ try {
 
             <div class="login-prompt">
                 <h2 id="user-name-login"> <!--To be linked from main.html when signing in-->
-                    Rajit Sharma
+                    <?php echo $name; ?>
                 </h2>
-                <input class="user-password-login" type="form" name="userPasswordLogin" placeholder="Enter Password" /><!--Check with database for correct entry-->
+                <!-- <input class="user-password-login" type="form" name="userPasswordLogin" placeholder="Enter Password" />
                 <div class="login-inline">
-                    <a href="main.php"><button class="switch-user-button">Different User</button></a><!--TODO LINK TO MAIN-PAGE-->
+                    <a href="main.php"><button class="switch-user-button">Different User</button></a>
                     <button class="login-button" id="login-button">Login</button>
-                </div>
+                </div> -->
+                <form id="passwordForm" method="POST" action="passwordChecker.php"> 
+                    <input class="user-password-login" type="password" id="userPasswordLogin" name="userPasswordLogin" placeholder="Enter Password" required/>
+                    <br><br><br>
+                        <div class="login-inline">
+                            <a href="main.php"><button type="button" class="switch-user-button">Different User</button></a>
+                            <button type="submit" class="login-button" id="login-button">Login</button> 
+                        </div>
+                </form>
             </div>
         </section>
 
@@ -154,7 +158,9 @@ try {
             <div><button class="footer-button" id="jobs-page-back">Back</button></div>
         </section>
 
+
         <!-- current job page -->
+        <!-- I haven't touched this page -->
 
         <section class="display-page" id="current-job-page" style="display:none">
             <div class="top-subtitle">
@@ -273,7 +279,9 @@ try {
                     </tbody>
                 </table>
             </div>
-            <div class="top-subtitle"><h2>Click to edit (not implemented)</h2></div>
+            <div class="top-subtitle">
+                <h2>Click to edit (not implemented)</h2>
+            </div>
             <br>
             <button class="footer-button" id="current-machine-back">Back</button>
         </section>
