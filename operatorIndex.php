@@ -1,7 +1,7 @@
 <?php
 session_start();
 //WIP
-$_SESSION['employeeID'] = 1;  
+$_SESSION['employeeID'] = 1;
 
 // Include database connection
 require_once 'includes/db_connect.php';
@@ -19,6 +19,7 @@ function h($string)
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +28,7 @@ function h($string)
     <link rel="stylesheet" href="styles/styles.css" type="text/css">
     <title>Production operator Index page</title>
 </head>
+
 <body>
     <main>
         <!-- page 1 -->
@@ -36,16 +38,16 @@ function h($string)
                 <h2 id="user-name-login"> <!--To be linked from main.html when signing in-->
                     Rajit Sharma
                 </h2>
-                <input class="user-password-login" type="form" name="userPasswordLogin"placeholder="Enter Password"/><!--Check with database for correct entry-->
+                <input class="user-password-login" type="form" name="userPasswordLogin" placeholder="Enter Password" /><!--Check with database for correct entry-->
                 <div class="login-inline">
                     <a href="main.php"><button class="switch-user-button">Different User</button></a><!--TODO LINK TO MAIN-PAGE-->
-                    <button class="login-button" id="login-button">Login</button> 
+                    <button class="login-button" id="login-button">Login</button>
                 </div>
-            </div> 
+            </div>
         </section>
 
         <!-- nav bar -->
-        <nav class="primary-nav" id="primary-nav-container"style="display:none">
+        <nav class="primary-nav" id="primary-nav-container" style="display:none">
             <nav class="nav-container">
                 <h1 id="nav-title">Production Operator : ${name}</h1>
                 <span>
@@ -56,21 +58,25 @@ function h($string)
         </nav>
 
         <!-- page 1 attribute/landing -->
-        <section class="display-page" id="attribute-page landing-page" style="display:none">
+        <section class="display-page" id="landing-page" style="display:none">
             <div class="top-subtitle">
                 <h3>Company notice: </h3>
-                <h4>Fire drill today at 3:00PM ACST</h4> 
+                <h4>Fire drill today at 3:00PM ACST</h4>
             </div>
             <div class="middle-container">
-                <!-- enter fake job page -->
-                <!-- <div><a class="attribute-container" id="job-pointer-atr"><img src="images/suitcase.png" alt="update-job-icon" class="attribute-icon">Job List</a></div> -->
-
-                <div><a class="attribute-container" id="job-pointer-atr"><img src="images/suitcase.png" alt="update-job-icon" class="show-jobs">Job List</a></div>
+                <!-- Pete's static pages -->
+                <!-- <div><a class="attribute-container" id="job-pointer-atr"><img src="images/suitcase.png" alt="update-job-icon" class="attribute-icon">Job List</a></div>
 
                 <div><a class="attribute-container" id="performance-pointer-atr"><img src="images/performance.png" alt="factory-performance-icon" class="attribute-icon">
-                    Factory Performance</a></div> <!--Will need to be linked with h-ref? or to have a section within this page-->
+                        Factory Performance</a></div>
                 <div><a class="attribute-container" id="machine-pointer-atr"><img src="images/machine.png" alt="update-machine-icon" class="attribute-icon">
-                    Update Machine</a></div> <!--Same as performance, but theres no design page for this-->
+                        Update Machine</a></div> -->
+
+                <div><a class="operator-task-icons" id="show-jobs"><img src="images/suitcase.png" alt="update-job-icon">Job List</a></div>
+
+                <div><a class="operator-task-icons" id="show-performance"><img src="images/performance.png" alt="update-job-icon">Factory Performance</a></div>
+
+                <div><a class="operator-task-icons" id="show-performance"><img src="images/performance.png" alt="update-job-icon">Factory Performance</a></div>
             </div>
         </section>
 
@@ -83,7 +89,7 @@ function h($string)
                 <ul class="job-pointer">Job: CNC Inspection</ul>
                 <ul class="job-pointer">Job: CNC Irregular Mount</ul>
                 <ul class="job-pointer">Job: Unstable network</ul>
-            
+
             </div>
         </section>
 
@@ -103,7 +109,7 @@ function h($string)
         <section class="display-page" id="current-job-page" style="display:none">
             <div class="top-subtitle">
                 <h3>Job: </h3>
-                <h4 id="current-job-text">${current-job.textContent}</h4> 
+                <h4 id="current-job-text">${current-job.textContent}</h4>
             </div>
             <div class="middle-container" style="justify-content: center;">
                 <div id="left-job-container">
@@ -134,15 +140,16 @@ function h($string)
         <footer class="bottom-container" id="footer-container" style="display: none;">
             <div>
                 <img src="images/manufactoring-logo.png" alt="manufactoring-logo" class="footer-manufacture-logo">
-                <button class="footer-button" id="back-button" style="display:none">Back</button> 
-                <button class="footer-button"id="update-button" style="display:none">Update</button> <!--Needs the form update in current-jobpage-->
+                <button class="footer-button" id="back-button" style="display:none">Back</button>
+                <button class="footer-button" id="update-button" style="display:none">Update</button> <!--Needs the form update in current-jobpage-->
                 <button class="footer-button" id="help-button">Help</button> <!--What is this for-->
             </div>
         </footer>
 
-        
+
     </main>
 
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </body>
+
 </html>

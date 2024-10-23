@@ -93,7 +93,7 @@ function h($string)
         </section>
 
         <!-- page 2 database -->
-        <section class="display-page" id="admin-database" style="display:none">
+        <section class="display-page" id="show-admin-database" style="display:none">
             <h2>User Database</h2>
             <table>
                 <thead>

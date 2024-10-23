@@ -2,6 +2,21 @@ document.addEventListener('DOMContentLoaded', function(){
     
     // Operators logic
     if (/operatorIndex\.(html|php)$/.test(window.location.pathname)){
+
+        // Sam's implementation
+        const realJobPage = document.getElementById('real-job-page');
+        const landingPage = document.getElementById('landing-page');
+
+        const displayJobs = document.getElementById('show-jobs');
+        
+        displayJobs.addEventListener('click', function(){
+            landingPage.style.display='none';
+            realJobPage.style.display='block';
+        });
+
+        
+
+
         const displayMain = document.getElementById('main-page');
         const displayMainNav = document.getElementById('primary-nav-container');
         const displayFooter = document.getElementById('footer-container');
@@ -21,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function(){
             const username=document.getElementById('user-name-login').textContent;
             document.getElementById('nav-title').textContent=`Production Operator : ${username}`;
             pageTransition(1,0,0);
-            
         })
 
         // document.querySelectorAll('.attribute-container').forEach(function(button){
@@ -85,15 +99,7 @@ document.addEventListener('DOMContentLoaded', function(){
         
         // Sam's implementation
 
-        const realJobPage = document.getElementById('real-job-page');
-        const landingPage = document.getElementById('landing-page');
 
-        const displayJobs = document.getElementById('show-jobs');
-        
-        displayJobs.addEventListener('click', function(){
-            landingPage.style.display='none';
-            realJobPage.style.display='block';
-        });
 
 
     }
