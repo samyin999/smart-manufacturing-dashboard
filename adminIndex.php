@@ -1,4 +1,8 @@
 <?php
+session_start();
+//WIP
+$_SESSION['employeeID'] = 1;  
+
 // Include database connection
 require_once 'includes/db_connect.php';
 
@@ -95,16 +99,16 @@ function h($string)
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Username</th>
-                        <th>Category</th>
-                        <th>Role</th>
-                        <th>Full Name</th>
-                        <th>Description</th>
+                        <th>name</th>
+                        <th>role</th>
+                        <th>job</th>
+                        <th>description</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($users as $user): ?>
                         <tr>
+                            <td><?php echo h($user['user_id']); ?></td>
                             <td><?php echo h($user['name']); ?></td>
                             <td><?php echo h($user['role']); ?></td>
                             <td><?php echo h($user['job']); ?></td>

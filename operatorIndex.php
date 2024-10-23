@@ -1,4 +1,8 @@
 <?php
+session_start();
+//WIP
+$_SESSION['employeeID'] = 1;  
+
 // Include database connection
 require_once 'includes/db_connect.php';
 
@@ -51,14 +55,18 @@ function h($string)
             </nav>
         </nav>
 
-        <!-- page 1 -->
-        <section class="display-page" id="attribute-page" style="display:none">
+        <!-- page 1 attribute/landing -->
+        <section class="display-page" id="attribute-page landing-page" style="display:none">
             <div class="top-subtitle">
                 <h3>Company notice: </h3>
                 <h4>Fire drill today at 3:00PM ACST</h4> 
             </div>
             <div class="middle-container">
-                <div><a class="attribute-container" id="job-pointer-atr"><img src="images/suitcase.png" alt="update-job-icon" class="attribute-icon">Job List</a></div>
+                <!-- enter fake job page -->
+                <!-- <div><a class="attribute-container" id="job-pointer-atr"><img src="images/suitcase.png" alt="update-job-icon" class="attribute-icon">Job List</a></div> -->
+
+                <div><a class="attribute-container" id="job-pointer-atr"><img src="images/suitcase.png" alt="update-job-icon" class="show-jobs">Job List</a></div>
+
                 <div><a class="attribute-container" id="performance-pointer-atr"><img src="images/performance.png" alt="factory-performance-icon" class="attribute-icon">
                     Factory Performance</a></div> <!--Will need to be linked with h-ref? or to have a section within this page-->
                 <div><a class="attribute-container" id="machine-pointer-atr"><img src="images/machine.png" alt="update-machine-icon" class="attribute-icon">
@@ -66,8 +74,9 @@ function h($string)
             </div>
         </section>
 
-        <!-- page 2 -->
+        <!-- page 2 fake job page -->
         <section class="display-page" id="job-page" style="display:none">
+            <h1>placehold fake job page</h1>
             <div class="x-track"> <!--Data to be extracted from database-->
                 <ul class="job-pointer">Job: CNC Machine Inspection</ul>
                 <ul class="job-pointer">Job: 3D Printer Troubleshooting</ul>
@@ -76,6 +85,18 @@ function h($string)
                 <ul class="job-pointer">Job: Unstable network</ul>
             
             </div>
+        </section>
+
+        <!-- real job page -->
+        <section class="display-page" id="real-job-page" style="display:none">
+            <h1>placeholder this is the real job page</h1>
+            <!-- <div class="x-track"> 
+                <ul class="job-pointer">Job: CNC Machine Inspection</ul>
+                <ul class="job-pointer">Job: 3D Printer Troubleshooting</ul>
+                <ul class="job-pointer">Job: CNC Inspection</ul>
+                <ul class="job-pointer">Job: CNC Irregular Mount</ul>
+                <ul class="job-pointer">Job: Unstable network</ul>
+            </div> -->
         </section>
 
         <!-- page 3 -->

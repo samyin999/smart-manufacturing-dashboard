@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         const displayFooterBack =document.getElementById('back-button');
         const displayFooterUpdate =document.getElementById('update-button');
-        const displayFooterHelp =document.getElementById('help-button');
+        
 
         console.log(`Found Document ${window.location.pathname}`);
 
@@ -24,20 +24,20 @@ document.addEventListener('DOMContentLoaded', function(){
             
         })
 
-        document.querySelectorAll('.attribute-container').forEach(function(button){
-            button.addEventListener('click', function(event){
-                const buttonId = event.currentTarget.id;
-            
+        // document.querySelectorAll('.attribute-container').forEach(function(button){
+        //     button.addEventListener('click', function(event){
+        //         const buttonId = event.currentTarget.id;
+        //         if(buttonId == 'job-pointer-atr'){
+        //             pageTransition(1,1,0);
+        //         }else if(buttonId == 'performance-pointer-atr'){
+        //             factoryPerformancePage();
+        //         }else{
+        //             updateMachinePage();
+        //         }
+        //     });
+        // });
 
-                if(buttonId == 'job-pointer-atr'){
-                    pageTransition(1,1,0);
-                }else if(buttonId == 'performance-pointer-atr'){
-                    factoryPerformancePage();
-                }else{
-                    updateMachinePage();
-                }
-            });
-        });
+
 
         document.querySelectorAll('.job-pointer').forEach(function(jobPointer){
             jobPointer.addEventListener('click', function(event){
@@ -83,12 +83,19 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         });
         
-        function factoryPerformancePage(){
+        // Sam's implementation
 
-        }
-        function updateMachinePage(){
+        const realJobPage = document.getElementById('real-job-page');
+        const landingPage = document.getElementById('landing-page');
 
-        }
+        const displayJobs = document.getElementById('show-jobs');
+        
+        displayJobs.addEventListener('click', function(){
+            landingPage.style.display='none';
+            realJobPage.style.display='block';
+        });
+
+
     }
 
     // Admin logic
@@ -103,9 +110,8 @@ document.addEventListener('DOMContentLoaded', function(){
         
         // Sam's implementation
 
-
         const displayLanding = document.getElementById('landing-page');
-        const displayDatabase = document.getElementById('admin-database');
+        const displayDatabase = document.getElementById('show-admin-database');
 
         document.getElementById('login-button').addEventListener('click', function(){
             //AND CHECK WITH DATABASE IF PASSWORD===PASSWORD
