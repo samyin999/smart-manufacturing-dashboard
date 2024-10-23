@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Hamido, Pete Lim">
+    <meta name="description" content="Production operator index/login page">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <title>SMD</title>
+</head>
+<body>  
+    <main>
+        <!-- Index Page -->
+        <section class="indexContainer" id="index-page" style="display:block">
+            <br>
+            <h1>Welcome to the Smart Manufacturing Dashboard</h1>
+            <img src="image/MainLogo.png" class="MainPageLogo" alt="Main Logo">
+            <p>Please select your role to continue:</p>
+        
+            <div class="role-buttons">
+                <button onclick="redirectToWorkers('administrator')">Administrator</button><br>
+                <button onclick="redirectToWorkers('factoryManager')">Factory Manager</button><br>
+                <button onclick="redirectToWorkers('productionOperator')">Production Operator</button><br>
+                <button onclick="redirectToWorkers('auditor')">Auditor</button>
+            </div>
+        </section>
+
+        <!-- Workers Page -->
+        <section class="workerContainer" id="worker-page" style="display:none">
+            <h1>Select a Worker</h1>
+            <br>
+            <p>You have selected the role: <strong id="userRole"></strong></p>
+            <img src="image/MainLogo.png" class="workerLogo">
+            <div id="workerList" class="worker-buttons"></div>
+            <p class="worker-not-you">Not you? <a href="index.html">Click here to change</a></p>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section class="dashboardContainer" id="dashboard-page" style="display:none">
+            <nav class="nav-container">
+                <h1 id="nav-title">Welcome</h1>
+                <span>
+                    <a href="index.html"><img class="nav-icon" src="images/logout.png" alt="logout-icon"></a>
+                    <a href="index.html"><img class="nav-icon" src="images/user-icon.png" alt="user-icon"></a>
+                </span>
+            </nav>
+
+            <div class="top-subtitle">
+                <h3>Company notice: </h3>
+                <h4>Fire drill today at 3:00PM ACST</h4> 
+            </div>
+            <div class="operations">
+                <button class="operation-button" onclick="showJobPage()">Manage Jobs</button><img src="image/monitorPerformance.png" class="monitorPerformance" alt="monitorPerformance">
+                <button class="operation-button" onclick="showPerformancePage()">Monitor Factory Performance</button><img src="image/manageMachines.png" class="manageMachines" alt="manageMachines">
+                <button class="operation-button" onclick="showMachinePage()">Manage Machines</button><img src="image/manageJobs.png" class="manageJobs" alt="manageJobs">
+                <button class="operation-button" onclick="showProductionOperatorsPage()">Manage Production Operators</button><img src="image/mangeProductionOperator.png" class="mangeProductionOperator" alt="mangeProductionOperator">
+                <img src="image/MainLogo.png" class="dashboardCompanyLogo" alt="dashboardCompanyLogo">
+            </div>
+            <div class="dashboardHelp">
+                <p><a href="index.html">Get Help</a></p>
+            </div>
+        </section>
+
+        <!-- Production Operator Login Page -->
+        <section class="display-page" id="production-login-page" style="display:none">
+            <nav class="secondary-nav">
+                <h1 id="employee-title">Production Operator</h1>
+                <img class="secondary-nav-logo" src="images/manufactoring-logo.png" alt="manufactoring-logo">
+            </nav>
+            <div class="login-prompt">
+                <h2 id="user-name-login">
+                    <h1 id="nav-title"><span id="workerName"></span></h1>
+                </h2>
+                <input class="user-password-login" type="password" name="userPasswordLogin" placeholder="Enter Password" />
+                <div class="login-inline">
+                    <a href="index.html"><button class="switch-user-button">Different User</button></a>
+                    <button class="login-button" id="login-button">Login</button> 
+                </div>
+            </div> 
+        </section>
+
+        <!-- Post Login Page -->
+        <section class="display-page" id="attribute-page" style="display:none">
+            <div class="top-subtitle">
+                <h3>Company notice: </h3>
+                <h4>Fire drill today at 3:00PM ACST</h4> 
+            </div>
+            <div class="middle-container">
+                <div>
+                    <a class="attribute-container" id="job-pointer-atr" onclick="showJobPage()">
+                        <img src="images/suitcase.png" alt="update-job-icon" class="attribute-icon">Job List
+                    </a>
+                </div>
+                <div>
+                    <a class="attribute-container" id="performance-pointer-atr" onclick="showPerformancePage()">
+                        <img src="images/performance.png" alt="factory-performance-icon" class="attribute-icon">Factory Performance
+                    </a>
+                </div>
+                <div>
+                    <a class="attribute-container" id="machine-pointer-atr" onclick="redirectToMachinePage()">
+                        <img src="images/machine.png" alt="update-machine-icon" class="attribute-icon">Update Machine
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Select Machine Page --> 
+        <div class="header" id="select-machine-header" style="display:none">
+            <h2>Select a Machine to Update</h2>
+        </div>
+        <div class="content" id="select-machine-content" style="display:none">
+            <div class="x-track">
+                <a href="#" class="job-pointer" id="cncmachine-btn" onclick="redirectToMachinePage('cncmachine')">CNC Machine</a>
+                <a href="#" class="job-pointer" id="3D-Printer-btn" onclick="redirectToMachinePage('3dprinter')">3D Printer</a>
+                <a href="#" class="job-pointer" id="lasercutter-btn" onclick="redirectToMachinePage('lasercutter')">Laser Cutter</a>
+                <a href="#" class="job-pointer" id="conveyorbelt-btn" onclick="redirectToMachinePage('conveyorbelt')">Conveyor Belt System</a>
+                <a href="#" class="job-pointer" id="injectionmolding-btn" onclick="redirectToMachinePage('injectionmolding')">Injection Molding Machine</a>
+            </div>
+        </div>
+
+        <!-- 3D Printer Update Page -->  
+        <section class="display-page" id="3dprinter-page" style="display:none">
+            <div class="header">
+                <h2>3D Printer Update</h2>
+            </div>
+            <div class="content">
+                <h3>Click the button below to update the 3D Printer</h3>
+                <button id="updateButton" class="operation-button">Update 3D Printer</button>
+                <div class="progress-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CNC Machine Update Page --> 
+        <section class="display-page" id="cncmachine-page" style="display:none">
+            <div class="header">
+                <h2>CNC Machine Update</h2>
+            </div>
+            <div class="content">
+                <h3>Click the button below to update the CNC Machine</h3>
+                <button id="updateButton" class="operation-button">Update CNC Machine</button>
+                <div class="progress-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conveyor Belt Update Page --> 
+        <section class="display-page" id="conveyorbelt-page" style="display:none">
+            <div class="header">
+                <h2>Conveyor Belt System Update</h2>
+            </div>
+            <div class="content">
+                <h3>Click the button below to update the Conveyor Belt System</h3>
+                <button id="updateButton" class="operation-button">Update Conveyor Belt System</button>
+                <div class="progress-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Injection Molding Update Page --> 
+        <section class="display-page" id="injectionmolding-page" style="display:none">
+            <div class="header">
+                <h2>Injection Molding Machine Update</h2>
+            </div>
+            <div class="content">
+                <h3>Click the button below to update the Injection Molding Machine</h3>
+                <button id="updateButton" class="operation-button">Update Injection Molding Machine</button>
+                <div class="progress-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Laser Cutter Update Page --> 
+        <section class="display-page" id="lasercutter-page" style="display:none">
+            <div class="header">
+                <h2>Laser Cutter Update</h2>
+            </div>
+            <div class="content">
+                <h3>Click the button below to update the Laser Cutter</h3>
+                <button id="updateButton" class="operation-button">Update Laser Cutter</button>
+                <div class="progress-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Job Page -->
+        <section class="display-page" id="job-page" style="display:none">
+            <div class="x-track"> <!-- Data to be extracted from the database -->
+                <ul class="job-pointer" onclick="showCurrentJob('CNC Machine Inspection')">Job: CNC Machine Inspection</ul>
+                <ul class="job-pointer" onclick="showCurrentJob('3D Printer Troubleshooting')">Job: 3D Printer Troubleshooting</ul>
+                <ul class="job-pointer" onclick="showCurrentJob('CNC Inspection')">Job: CNC Inspection</ul>
+                <ul class="job-pointer" onclick="showCurrentJob('CNC Irregular Mount')">Job: CNC Irregular Mount</ul>
+                <ul class="job-pointer" onclick="showCurrentJob('Unstable network')">Job: Unstable network</ul>
+            </div>
+        </section>
+
+        <!-- Current Job Page -->
+        <section class="display-page" id="current-job-page" style="display:none">
+            <div class="top-subtitle">
+                <h3>Job: </h3>
+                <h4 id="current-job-text"></h4> 
+            </div>
+            <div class="middle-container" style="justify-content: center;">
+                <div id="left-job-container">
+                    <h4 style="margin-top:2vh;">Status: </h4>
+                    <div>
+                        <div>
+                            <label for="queued">Queued</label>
+                            <input type="checkbox" name="queued" id="queued">
+                        </div>
+                        <div>
+                            <label for="progress">Progress</label>
+                            <input type="checkbox" name="progress" id="progress">
+                        </div>
+                        <div>
+                            <label for="completed">Completed</label>
+                            <input type="checkbox" name="completed" id="completed">
+                        </div>
+                    </div>
+                </div>
+                <div id="right-job-container">
+                    <h4>Notes:</h4>
+                    <input type="text" name="submitNotes" placeholder="Enter any additional information regarding the job, including issues, requests, and further commodities">
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bottom-container" id="footer-container" style="display: none;">
+            <div>
+                <img src="images/manufactoring-logo.png" alt="manufactoring-logo" class="footer-manufacture-logo">
+                <button class="footer-button" id="back-button" style="display:none">Back</button> 
+                <button class="footer-button" id="update-button" style="display:none">Update</button>
+                <button class="footer-button" id="help-button">Help</button>
+            </div>
+        </footer>
+    </main>
+
+    <script src="scripts.js"></script>
+   
+</body>
+</html>

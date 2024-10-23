@@ -5,7 +5,7 @@ $_SESSION['employeeID'] = 4;
 // Include database connection
 require_once 'includes/db_connect.php';
 
-// Im not sure what else is needed
+// No database required here.
 ?>
 
 <!DOCTYPE html>

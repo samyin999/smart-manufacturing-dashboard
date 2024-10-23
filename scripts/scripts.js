@@ -246,6 +246,231 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         });
     }
+
+    if (/managerIndex\.(html|php)$/.test(window.location.pathname)) {
+        // Main page elements
+        const displayMain = document.getElementById('main-page');
+        const displayMainNav = document.getElementById('primary-nav-container');
+        const footerContainer = document.getElementById('footer-container');
+        
+        // Pages
+        const landingPage = document.getElementById('landing-page');
+        const performancePage = document.getElementById('performance-page');
+        const machinesManagementPage = document.getElementById('machines-management-page');
+        const machineFormPage = document.getElementById('machine-form-page');
+        const jobsManagementPage = document.getElementById('jobs-management-page');
+        const jobFormPage = document.getElementById('job-form-page');
+        const assignmentsPage = document.getElementById('assignments-page');
+
+        // Navigation buttons
+        const showPerformance = document.getElementById('show-performance');
+        const showMachinesManagement = document.getElementById('show-machines-management');
+        const showJobsManagement = document.getElementById('show-jobs-management');
+        const showAssignments = document.getElementById('show-assignments');
+
+        // Back buttons
+        const performanceBack = document.getElementById('performance-page-back');
+        const machinesManagementBack = document.getElementById('machines-management-back');
+        const jobsManagementBack = document.getElementById('jobs-management-back');
+        const assignmentsBack = document.getElementById('assignments-page-back');
+
+        // Form buttons
+        const addMachineButton = document.getElementById('add-machine-button');
+        const machineFormCancel = document.getElementById('machine-form-cancel');
+        const addJobButton = document.getElementById('add-job-button');
+        const jobFormCancel = document.getElementById('job-form-cancel');
+
+        // Utility function to hide all pages
+        function hideAllPages() {
+            const pages = document.querySelectorAll('.display-page');
+            pages.forEach(page => page.style.display = 'none');
+        }
+
+        // Utility function to show a specific page
+        function showPage(page) {
+            hideAllPages();
+            page.style.display = 'block';
+        }
+
+        // Login handler
+
+        // gpt generated this part
+
+        // document.getElementById('login-button').addEventListener('click', function(e) {
+        //     e.preventDefault(); // Prevent form submission for demo
+        //     displayMain.style.display = 'none';
+        //     const username = document.getElementById('user-name-login').textContent;
+        //     document.getElementById('nav-title').textContent = `Factory Manager: ${username}`;
+        //     displayMainNav.style.display = 'block';
+        //     footerContainer.style.display = 'block';
+        //     showPage(landingPage);
+        // });
+
+        document.getElementById('login-button').addEventListener('click', function() {
+            alert('This is a test popup message!');
+            displayMain.style.display = 'none';
+            const username = document.getElementById('user-name-login').textContent;
+            document.getElementById('nav-title').textContent = `Factory Manager: ${username}`;
+            landingPage.style.display = 'block';
+            displayMainNav.style.display = 'block';
+        });
+
+        // Navigation handlers
+        showPerformance.addEventListener('click', () => showPage(performancePage));
+        showMachinesManagement.addEventListener('click', () => showPage(machinesManagementPage));
+        showJobsManagement.addEventListener('click', () => showPage(jobsManagementPage));
+        showAssignments.addEventListener('click', () => showPage(assignmentsPage));
+
+        // Back button handlers
+        performanceBack.addEventListener('click', () => showPage(landingPage));
+        machinesManagementBack.addEventListener('click', () => showPage(landingPage));
+        jobsManagementBack.addEventListener('click', () => showPage(landingPage));
+        assignmentsBack.addEventListener('click', () => showPage(landingPage));
+
+        // Machine Management
+        addMachineButton.addEventListener('click', function() {
+            document.getElementById('machine-form-title').textContent = 'Add New Machine';
+            document.getElementById('machineForm').reset();
+            document.getElementById('machine-id').value = '';
+            showPage(machineFormPage);
+        });
+
+        machineFormCancel.addEventListener('click', () => showPage(machinesManagementPage));
+
+        // Handle machine edit buttons
+        document.querySelectorAll('[data-machine-id]').forEach(button => {
+            if (button.classList.contains('edit-button')) {
+                button.addEventListener('click', function() {
+                    const machineId = this.dataset.machineId;
+                    document.getElementById('machine-form-title').textContent = 'Edit Machine';
+                    document.getElementById('machine-id').value = machineId;
+                    // Here you would typically fetch machine data and populate the form
+                    showPage(machineFormPage);
+                });
+            } else if (button.classList.contains('delete-button')) {
+                button.addEventListener('click', function() {
+                    const machineId = this.dataset.machineId;
+                    if (confirm('Are you sure you want to delete this machine?')) {
+                        // Here you would typically send a delete request to the server
+                        console.log('Deleting machine:', machineId);
+                    }
+                });
+            }
+        });
+
+        // Machine form submission
+        document.getElementById('machineForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            // Here you would typically send the form data to the server
+            console.log('Saving machine:', Object.fromEntries(formData));
+            showPage(machinesManagementPage);
+        });
+
+        // Job Management
+        addJobButton.addEventListener('click', function() {
+            document.getElementById('job-form-title').textContent = 'Add New Job';
+            document.getElementById('jobForm').reset();
+            document.getElementById('job-id').value = '';
+            showPage(jobFormPage);
+        });
+
+        jobFormCancel.addEventListener('click', () => showPage(jobsManagementPage));
+
+        // Handle job edit buttons
+        document.querySelectorAll('[data-job-id]').forEach(button => {
+            if (button.classList.contains('edit-button')) {
+                button.addEventListener('click', function() {
+                    const jobId = this.dataset.jobId;
+                    document.getElementById('job-form-title').textContent = 'Edit Job';
+                    document.getElementById('job-id').value = jobId;
+                    // Here you would typically fetch job data and populate the form
+                    showPage(jobFormPage);
+                });
+            } else if (button.classList.contains('delete-button')) {
+                button.addEventListener('click', function() {
+                    const jobId = this.dataset.jobId;
+                    if (confirm('Are you sure you want to delete this job?')) {
+                        // Here you would typically send a delete request to the server
+                        console.log('Deleting job:', jobId);
+                    }
+                });
+            }
+        });
+
+        // Job form submission
+        document.getElementById('jobForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            // Here you would typically send the form data to the server
+            console.log('Saving job:', Object.fromEntries(formData));
+            showPage(jobsManagementPage);
+        });
+
+        // Assignment Management
+        document.getElementById('assignmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const operatorId = document.getElementById('operator-select').value;
+            const jobId = document.getElementById('job-select').value;
+            
+            // Here you would typically send the assignment to the server
+            console.log('Creating assignment:', { operatorId, jobId });
+            
+            // For demo purposes, add the assignment to the table
+            const tbody = document.getElementById('assignments-table');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${document.getElementById('operator-select').selectedOptions[0].text}</td>
+                <td>${document.getElementById('job-select').selectedOptions[0].text}</td>
+                <td>Assigned</td>
+                <td>
+                    <button class="delete-button" onclick="this.closest('tr').remove()">Remove</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            this.reset();
+        });
+
+        // Add AJAX functionality for form submissions
+        function handleFormSubmit(url, formData) {
+            return fetch(url, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        }
+
+        // Handle update machine status
+        function updateMachineStatus(machineId, status) {
+            const formData = new FormData();
+            formData.append('machine_id', machineId);
+            formData.append('status', status);
+            return handleFormSubmit('update_machine_status.php', formData);
+        }
+
+        // Handle update job status
+        function updateJobStatus(jobId, status) {
+            const formData = new FormData();
+            formData.append('job_id', jobId);
+            formData.append('status', status);
+            return handleFormSubmit('update_job_status.php', formData);
+        }
+
+        // Initialize any tooltips or popovers
+        const tooltips = document.querySelectorAll('[data-toggle="tooltip"]');
+        tooltips.forEach(tooltip => {
+            tooltip.addEventListener('mouseover', function() {
+                this.setAttribute('title', this.dataset.originalTitle);
+            });
+        });
+    }
 });
 
 // Ajay's Javascript
