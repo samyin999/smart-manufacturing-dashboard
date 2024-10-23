@@ -38,10 +38,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 try {
-    // Simple select query
-    $stmt = $pdo->query("SELECT * FROM jobs");
-    $jobs = $stmt->fetchAll();
-} catch(PDOException $e) {
+    // Get both jobs and machines
+    $stmt_jobs = $pdo->query("SELECT * FROM jobs");
+    $jobs = $stmt_jobs->fetchAll();
+
+    $stmt_machines = $pdo->query("SELECT * FROM machines");
+    $machines = $stmt_machines->fetchAll();
+} catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
 ?>
@@ -60,7 +63,7 @@ try {
 
 <body>
     <main>
-        <!-- "main" page/login -->
+        <!-- "main" page -->
         <section class="display-page" id="main-page" style="display:block">
 
             <div class="login-prompt">
@@ -99,17 +102,20 @@ try {
                 <div><a class="attribute-container" id="performance-pointer-atr"><img src="images/performance.png" alt="factory-performance-icon" class="attribute-icon">
                         Factory Performance</a></div>
                 <div><a class="attribute-container" id="machine-pointer-atr"><img src="images/machine.png" alt="update-machine-icon" class="attribute-icon">
-                        Update Machine</a></div> -->
+                        Update Machine</a></div> 
+                        
+                I reimplemented the parts here as traversing through pages linearly does not work with the three branching paths (jobs/factory/update)
+                        -->
 
                 <div><a class="operator-task-icons" id="show-jobs"><img src="images/suitcase.png" alt="update-job-icon">Job List</a></div>
 
                 <div><a class="operator-task-icons" id="show-performance"><img src="images/performance.png" alt="update-job-icon">Factory Performance</a></div>
 
-                <div><a class="operator-task-icons" id="show-performance"><img src="images/machine.png" alt="update-job-icon">Update Machine</a></div>
+                <div><a class="operator-task-icons" id="show-machines"><img src="images/machine.png" alt="update-job-icon">Update Machine</a></div>
             </div>
         </section>
 
-        <!-- Pete's fake job page -->
+        <!-- Pete's static job page -->
         <section class="display-page" id="job-page" style="display:none">
             <h1>placehold fake job page</h1>
             <div class="x-track"> <!--Data to be extracted from database-->
@@ -123,26 +129,32 @@ try {
         </section>
 
         <!-- real job page -->
-        <section class="display-page" id="real-job-page" style="display:none">
-    <h2>Jobs Database</h2>
-    <div class="x-track">
-        <?php 
-        if (!empty($jobs)) {
-            foreach ($jobs as $job) { ?>
-                <ul class="job-pointer">
-                    Job: <?php echo $job['name']; ?>
-                    <span class="job-status">
-                        (<?php echo $job['status']; ?>)
-                    </span>
-                </ul>
-            <?php }
-        } else {
-            echo "<p>No jobs found</p>";
-        }
-        ?>
-    </div>
+        <!-- shows jobs that are in the database, currently only shows the list of jobs, clicking on them does not do anything yet, but should link to the current job page -->
 
-        <!-- page 3 -->
+        <section class="display-page" id="real-job-page" style="display:none">
+            <h2>Jobs Database</h2>
+            <div class="x-track">
+                <?php
+                if (!empty($jobs)) {
+                    foreach ($jobs as $job) { ?>
+                        <ul class="job-pointer">
+                            Job: <?php echo $job['name']; ?>
+                            <span class="job-status">
+                                (<?php echo $job['status']; ?>)
+                            </span>
+                        </ul>
+                <?php }
+                } else {
+                    echo "<p>No jobs found</p>";
+                }
+                ?>
+            </div>
+
+            <br>
+            <div><button class="footer-button" id="jobs-page-back">Back</button></div>
+        </section>
+
+        <!-- current job page -->
 
         <section class="display-page" id="current-job-page" style="display:none">
             <div class="top-subtitle">
@@ -172,8 +184,101 @@ try {
                     <h4>Notes:</h4> <!--Data to be submitted to database, and allow the update button to be functional-->
                     <input type="form" name="submitNotes" placeholder="Enter any additional information regarding the job, including issues, requests, and further commodities">
                 </div>
+
+
             </div>
         </section>
+
+        <!-- Factory performance -->
+
+        <section class="display-page" id="performance-page" style="display:none">
+            <div><img src="images/fake-performance-stats.png" alt="update-job-icon"></div>
+            <br>
+            <div><button class="footer-button" id="performance-page-back">Back</button></div>
+        </section>
+
+        <!-- Machines page -->
+        <!-- Similar to jobs, clicking on a machine should bring it to the next page -->
+
+        <section class="display-page" id="machines-page" style="display:none">
+
+            <div class="top-subtitle">
+                <h2>Machines Database</h2>
+            </div>
+            <div class="x-track">
+                <?php
+                if (!empty($machines)) {
+                    foreach ($machines as $machine) { ?>
+                        <ul class="job-pointer">
+                            Machine: <?php echo $machine['machine_name']; ?>
+                            <span class="job-status">
+                                (ID: <?php echo $machine['id']; ?>)
+                            </span>
+                        </ul>
+                <?php }
+                } else {
+                    echo "<p>No machines found</p>";
+                }
+                ?>
+            </div>
+            <br>
+            <div><button class="footer-button" id="machines-page-back">Back</button></div>
+            <br>
+            <div><button class="footer-button" id="demo-machine-edit-page">Demo machine edit</button></div>
+
+        </section>
+
+        <!-- Edit machines page -->
+
+        <section class="display-page" id="current-machine-page" style="display:none">
+            <div class="top-subtitle">
+                <h3>Machine: </h3>
+                <h4 id="current-job-text">CURRENT MACHINE NAME</h4>
+            </div>
+            <div class="middle-container" style="justify-content: center;">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Timestamp</th>
+                            <th>Machine Name</th>
+                            <th>Temperature</th>
+                            <th>Pressure</th>
+                            <th>Vibration</th>
+                            <th>Humidity</th>
+                            <th>Power Consumption</th>
+                            <th>Status</th>
+                            <th>Error Code</th>
+                            <th>Production Count</th>
+                            <th>Maintenance Log</th>
+                            <th>Speed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2024-03-20 14:30:00</td>
+                            <td>CNC Machine</td>
+                            <td>75.30</td>
+                            <td>14.50</td>
+                            <td>2.45</td>
+                            <td>45.60</td>
+                            <td>1200.50</td>
+                            <td>active</td>
+                            <td>NULL</td>
+                            <td>1500</td>
+                            <td>Regular maintenance completed</td>
+                            <td>60.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="top-subtitle"><h2>Click to edit (not implemented)</h2></div>
+            <br>
+            <button class="footer-button" id="current-machine-back">Back</button>
+        </section>
+
+        <!-- Footer -->
 
         <footer class="bottom-container" id="footer-container" style="display: none;">
             <div>

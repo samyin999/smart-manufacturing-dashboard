@@ -4,18 +4,65 @@ document.addEventListener('DOMContentLoaded', function(){
     if (/operatorIndex\.(html|php)$/.test(window.location.pathname)){
 
         // Sam's implementation
+
+        // Pages
         const realJobPage = document.getElementById('real-job-page');
         const landingPage = document.getElementById('landing-page');
+        const performancePage = document.getElementById('performance-page');
+        const machinesPage = document.getElementById('machines-page');
+        const curMachinePage = document.getElementById('current-machine-page');
+
+        // Buttons
+
+        // I know this is a dumb solution but I dont have time to figure out an elegant solution, but it works as our website is small, linear pages don't work too well with branching paths
 
         const displayJobs = document.getElementById('show-jobs');
+        const displayPerformance = document.getElementById('show-performance');
+        const displayMachines = document.getElementById('show-machines');
+        const displayDemoMachinePage = document.getElementById('demo-machine-edit-page');
+
+        const performancePageBack = document.getElementById('performance-page-back');
+        const jobsPageBack = document.getElementById('jobs-page-back');
+        const machinesPageBack = document.getElementById('machines-page-back');
+        const currentMachineBack = document.getElementById('current-machine-back');
         
+        // forwards navigation
         displayJobs.addEventListener('click', function(){
             landingPage.style.display='none';
             realJobPage.style.display='block';
         });
-
+        displayPerformance.addEventListener('click', function(){
+            landingPage.style.display='none';
+            performancePage.style.display='block';
+        });
+        displayMachines.addEventListener('click', function(){
+            landingPage.style.display='none';
+            machinesPage.style.display='block';
+        });
+        displayDemoMachinePage.addEventListener('click', function(){
+            machinesPage.style.display='none';
+            curMachinePage.style.display='block';
+        });
         
+        // backwards navigation
+        performancePageBack.addEventListener('click', function(){
+            landingPage.style.display='block';
+            performancePage.style.display='none';
+        });
+        jobsPageBack.addEventListener('click', function(){
+            landingPage.style.display='block';
+            realJobPage.style.display='none';
+        });
+        machinesPageBack.addEventListener('click', function(){
+            landingPage.style.display='block';
+            machinePage.style.display='none';
+        });
+        currentMachineBack.addEventListener('click', function(){
+            landingPage.style.display='block';
+            curMachinePage.style.display='none';
+        });
 
+        // Pete
 
         const displayMain = document.getElementById('main-page');
         const displayMainNav = document.getElementById('primary-nav-container');
@@ -23,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
         const displayFooterBack =document.getElementById('back-button');
         const displayFooterUpdate =document.getElementById('update-button');
-        
 
         console.log(`Found Document ${window.location.pathname}`);
 
@@ -53,15 +99,16 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-        document.querySelectorAll('.job-pointer').forEach(function(jobPointer){
-            jobPointer.addEventListener('click', function(event){
-                document.getElementById('current-job-text').textContent=event.currentTarget.textContent;
-                pageTransition(1, 1, 1);
-            });
-        });
-        displayFooterBack.addEventListener('click',function(){
-            pageTransition(0,1,0);
-        });
+        // document.querySelectorAll('.job-pointer').forEach(function(jobPointer){
+        //     jobPointer.addEventListener('click', function(event){
+        //         document.getElementById('current-job-text').textContent=event.currentTarget.textContent;
+        //         pageTransition(1, 1, 1);
+        //     });
+        // });
+
+        // displayFooterBack.addEventListener('click',function(){
+        //     pageTransition(0,1,0);
+        // });
 
         function pageTransition(page, back, update){
             displayMainNav.style.display='block';

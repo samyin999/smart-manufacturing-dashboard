@@ -248,7 +248,47 @@ h4{
     cursor: pointer;
 }
 
-.hidden {
-    display: none;
+#performance-page img {
+    width: 100%;
 }
 
+.machine-pointer{
+    border:1px solid black;
+    padding:4vmin;
+    font-size:3vmin;
+    width:80%;
+    text-align: center;
+    border-radius: 18px;
+    text-decoration: none;
+    color:#000;
+}
+.machine-pointer:hover{
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+td:nth-child(9) { /* Status column */
+    color: green;
+    font-weight: bold;
+}
