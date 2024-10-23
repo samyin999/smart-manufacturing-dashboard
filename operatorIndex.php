@@ -1,19 +1,48 @@
 <?php
-session_start();
-//WIP
-$_SESSION['employeeID'] = 1;
+// session_start();
+// //WIP
+// $_SESSION['employeeID'] = 1;
 
-// Include database connection
+// // Include database connection
+// require_once 'includes/db_connect.php';
+
+// // Fetch all users from the database
+// $stmt = $pdo->query("SELECT * FROM users");
+// $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// // Function to safely output HTML
+// function h($string)
+// {
+//     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+// }
+
+// try {
+//     $stmt = $pdo->prepare("
+//         SELECT jobs.id, jobs.name, jobs.status, 
+//                machines.name as machine_name
+//         FROM jobs
+//         JOIN machines ON jobs.machine = machines.id
+//         ORDER BY jobs.id DESC
+//     ");
+//     $stmt->execute();
+//     $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// } catch (PDOException $e) {
+//     error_log("Error fetching jobs: " . $e->getMessage());
+//     $jobs = [];
+// }
+
 require_once 'includes/db_connect.php';
 
-// Fetch all users from the database
-$stmt = $pdo->query("SELECT * FROM users");
-$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Turn on error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Function to safely output HTML
-function h($string)
-{
-    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+try {
+    // Simple select query
+    $stmt = $pdo->query("SELECT * FROM jobs");
+    $jobs = $stmt->fetchAll();
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
 ?>
 
@@ -31,7 +60,7 @@ function h($string)
 
 <body>
     <main>
-        <!-- page 1 -->
+        <!-- "main" page/login -->
         <section class="display-page" id="main-page" style="display:block">
 
             <div class="login-prompt">
@@ -57,7 +86,7 @@ function h($string)
             </nav>
         </nav>
 
-        <!-- page 1 attribute/landing -->
+        <!-- Landing page -->
         <section class="display-page" id="landing-page" style="display:none">
             <div class="top-subtitle">
                 <h3>Company notice: </h3>
@@ -76,11 +105,11 @@ function h($string)
 
                 <div><a class="operator-task-icons" id="show-performance"><img src="images/performance.png" alt="update-job-icon">Factory Performance</a></div>
 
-                <div><a class="operator-task-icons" id="show-performance"><img src="images/performance.png" alt="update-job-icon">Factory Performance</a></div>
+                <div><a class="operator-task-icons" id="show-performance"><img src="images/machine.png" alt="update-job-icon">Update Machine</a></div>
             </div>
         </section>
 
-        <!-- page 2 fake job page -->
+        <!-- Pete's fake job page -->
         <section class="display-page" id="job-page" style="display:none">
             <h1>placehold fake job page</h1>
             <div class="x-track"> <!--Data to be extracted from database-->
@@ -95,17 +124,26 @@ function h($string)
 
         <!-- real job page -->
         <section class="display-page" id="real-job-page" style="display:none">
-            <h1>placeholder this is the real job page</h1>
-            <!-- <div class="x-track"> 
-                <ul class="job-pointer">Job: CNC Machine Inspection</ul>
-                <ul class="job-pointer">Job: 3D Printer Troubleshooting</ul>
-                <ul class="job-pointer">Job: CNC Inspection</ul>
-                <ul class="job-pointer">Job: CNC Irregular Mount</ul>
-                <ul class="job-pointer">Job: Unstable network</ul>
-            </div> -->
-        </section>
+    <h2>Jobs Database</h2>
+    <div class="x-track">
+        <?php 
+        if (!empty($jobs)) {
+            foreach ($jobs as $job) { ?>
+                <ul class="job-pointer">
+                    Job: <?php echo $job['name']; ?>
+                    <span class="job-status">
+                        (<?php echo $job['status']; ?>)
+                    </span>
+                </ul>
+            <?php }
+        } else {
+            echo "<p>No jobs found</p>";
+        }
+        ?>
+    </div>
 
         <!-- page 3 -->
+
         <section class="display-page" id="current-job-page" style="display:none">
             <div class="top-subtitle">
                 <h3>Job: </h3>
