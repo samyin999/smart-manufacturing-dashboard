@@ -13,7 +13,10 @@ session_start();
 //     die("Connection failed: " . mysqli_connect_error());
 // }
 
-$receivedID = 1; #NOTE THIS MUST BE RECEIVED AND BE pre-PROCESSED TO ENSURE NO INJECTION ATTACKS
+$receivedID = 2; #NOTE THIS MUST BE RECEIVED AND BE pre-PROCESSED TO ENSURE NO INJECTION ATTACKS
+
+// for demo purposes 1=bob manager, 2=rajit operator, 3=john auditor, 4=john admin
+
 $_SESSION['employeeId'] = $receivedID;
 
 // $name = "SELECT name FROM users WHERE user_id=$receivedID;";

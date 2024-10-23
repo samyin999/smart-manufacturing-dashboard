@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const landingPage = document.getElementById('landing-page');
         const performancePage = document.getElementById('performance-page');
         const machinesPage = document.getElementById('machines-page');
-        const curMachinePage = document.getElementById('current-machine-page');
+        const currentMachinePage = document.getElementById('current-machine-page');
 
         // Buttons
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function(){
         });
         displayDemoMachinePage.addEventListener('click', function(){
             machinesPage.style.display='none';
-            curMachinePage.style.display='block';
+            currentMachinePage.style.display='block';
         });
         
         // backwards navigation
@@ -55,11 +55,11 @@ document.addEventListener('DOMContentLoaded', function(){
         });
         machinesPageBack.addEventListener('click', function(){
             landingPage.style.display='block';
-            machinePage.style.display='none';
+            machinesPage.style.display='none';
         });
         currentMachineBack.addEventListener('click', function(){
             landingPage.style.display='block';
-            curMachinePage.style.display='none';
+            currentMachinePage.style.display='none';
         });
 
         // Pete
@@ -292,6 +292,14 @@ document.addEventListener('DOMContentLoaded', function(){
             page.style.display = 'block';
         }
 
+        document.getElementById('machine-form-cancel').addEventListener('click', function() {
+            // Clear the form
+            document.getElementById('machineForm').reset();
+            // Hide the form page and show the machines management page
+            document.getElementById('machine-form-page').style.display = 'none';
+            document.getElementById('machines-management-page').style.display = 'block';
+        });
+
         // Login handler
 
         // gpt generated this part
@@ -307,7 +315,6 @@ document.addEventListener('DOMContentLoaded', function(){
         // });
 
         document.getElementById('login-button').addEventListener('click', function() {
-            alert('This is a test popup message!');
             displayMain.style.display = 'none';
             const username = document.getElementById('user-name-login').textContent;
             document.getElementById('nav-title').textContent = `Factory Manager: ${username}`;
@@ -327,45 +334,122 @@ document.addEventListener('DOMContentLoaded', function(){
         jobsManagementBack.addEventListener('click', () => showPage(landingPage));
         assignmentsBack.addEventListener('click', () => showPage(landingPage));
 
+        // // Machine Management
+        // addMachineButton.addEventListener('click', function() {
+        //     document.getElementById('machine-form-title').textContent = 'Add New Machine';
+        //     document.getElementById('machineForm').reset();
+        //     document.getElementById('machine-id').value = '';
+        //     showPage(machineFormPage);
+        // });
+
+
+        // machineFormCancel.addEventListener('click', () => showPage(machinesManagementPage));
+
+        // // Handle machine edit buttons
+        // document.querySelectorAll('[data-machine-id]').forEach(button => {
+        //     if (button.classList.contains('edit-button')) {
+        //         button.addEventListener('click', function() {
+        //             const machineId = this.dataset.machineId;
+        //             document.getElementById('machine-form-title').textContent = 'Edit Machine';
+        //             document.getElementById('machine-id').value = machineId;
+        //             // Here you would typically fetch machine data and populate the form
+        //             showPage(machineFormPage);
+        //         });
+        //     } else if (button.classList.contains('delete-button')) {
+        //         button.addEventListener('click', function() {
+        //             const machineId = this.dataset.machineId;
+        //             if (confirm('Are you sure you want to delete this machine?')) {
+        //                 // Here you would typically send a delete request to the server
+        //                 console.log('Deleting machine:', machineId);
+        //             }
+        //         });
+        //     }
+        // });
+
+        // // Machine form submission
+        // document.getElementById('machineForm').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        //     const formData = new FormData(this);
+        //     // Here you would typically send the form data to the server
+        //     console.log('Saving machine:', Object.fromEntries(formData));
+        //     showPage(machinesManagementPage);
+        // });
+
         // Machine Management
-        addMachineButton.addEventListener('click', function() {
-            document.getElementById('machine-form-title').textContent = 'Add New Machine';
-            document.getElementById('machineForm').reset();
-            document.getElementById('machine-id').value = '';
-            showPage(machineFormPage);
-        });
+addMachineButton.addEventListener('click', function() {
+    document.getElementById('machine-form-title').textContent = 'Add New Machine';
+    document.getElementById('machineForm').reset();
+    document.getElementById('machine-id').value = '';
+    showPage(machineFormPage);
+});
 
-        machineFormCancel.addEventListener('click', () => showPage(machinesManagementPage));
-
-        // Handle machine edit buttons
-        document.querySelectorAll('[data-machine-id]').forEach(button => {
-            if (button.classList.contains('edit-button')) {
-                button.addEventListener('click', function() {
-                    const machineId = this.dataset.machineId;
-                    document.getElementById('machine-form-title').textContent = 'Edit Machine';
-                    document.getElementById('machine-id').value = machineId;
-                    // Here you would typically fetch machine data and populate the form
+// Handle machine edit
+document.querySelectorAll('[data-machine-id]').forEach(button => {
+    if (button.classList.contains('edit-button')) {
+        button.addEventListener('click', function() {
+            const machineId = this.dataset.machineId;
+            document.getElementById('machine-form-title').textContent = 'Edit Machine';
+            
+            // Fetch machine data from the server
+            fetch(`api/get_machine.php?id=${machineId}`)
+                .then(response => response.json())
+                .then(machine => {
+                    // Pre-fill the form with machine data
+                    document.getElementById('machine-id').value = machine.id;
+                    document.getElementById('machine-name').value = machine.machine_name;
+                    document.getElementById('temperature').value = machine.temperature;
+                    document.getElementById('pressure').value = machine.pressure;
+                    document.getElementById('vibration').value = machine.vibration;
+                    document.getElementById('humidity').value = machine.humidity;
+                    document.getElementById('power-consumption').value = machine.power_consumption;
+                    document.getElementById('operational-status').value = machine.operational_status;
+                    document.getElementById('error-code').value = machine.error_code || '';
+                    document.getElementById('production-count').value = machine.production_count || '';
+                    document.getElementById('maintenance-log').value = machine.maintenance_log || '';
+                    document.getElementById('speed').value = machine.speed;
+                    
                     showPage(machineFormPage);
+                })
+                .catch(error => {
+                    console.error('Error fetching machine data:', error);
+                    alert('Error loading machine data. Please try again.');
                 });
-            } else if (button.classList.contains('delete-button')) {
-                button.addEventListener('click', function() {
-                    const machineId = this.dataset.machineId;
-                    if (confirm('Are you sure you want to delete this machine?')) {
-                        // Here you would typically send a delete request to the server
-                        console.log('Deleting machine:', machineId);
-                    }
-                });
-            }
         });
+    }
+});
 
-        // Machine form submission
-        document.getElementById('machineForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            // Here you would typically send the form data to the server
-            console.log('Saving machine:', Object.fromEntries(formData));
+// Handle form submission
+document.getElementById('machineForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const machineId = document.getElementById('machine-id').value;
+    const url = machineId ? 'api/update_machine.php' : 'api/add_machine.php';
+
+    // Add timestamp for new machines
+    if (!machineId) {
+        formData.append('timestamp', new Date().toISOString().slice(0, 19).replace('T', ' '));
+    }
+
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(machineId ? 'Machine updated successfully!' : 'Machine added successfully!');
             showPage(machinesManagementPage);
-        });
+            // Reload the page to show updated data
+            location.reload();
+        } else {
+            alert('Error: ' + (data.message || 'Unknown error occurred'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    });
+});
 
         // Job Management
         addJobButton.addEventListener('click', function() {

@@ -1,7 +1,8 @@
 <?php
 session_start();
-//WIP
-$_SESSION['employeeID'] = 1;
+$_SESSION['employeeID'] = 4;
+
+// for demo purposes 1=bob manager, 2=rajit operator, 3=john auditor, 4=john admin
 
 // Include database connection
 require_once 'includes/db_connect.php';

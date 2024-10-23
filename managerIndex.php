@@ -2,7 +2,9 @@
 require_once 'includes/db_connect.php';
 session_start();
 
-$receivedID = 1; // For demo purposes
+$receivedID = 1; 
+// for demo purposes 1=bob manager, 2=rajit operator, 3=john auditor, 4=john admin
+
 $_SESSION['employeeId'] = $receivedID;
 
 // Fetch manager name
@@ -128,31 +130,76 @@ try {
 
         <!-- Add/Edit Machine Form -->
         <section class="display-page" id="machine-form-page" style="display:none">
-            <div class="form-container">
-                <h2 id="machine-form-title">Add New Machine</h2>
-                <form id="machineForm">
-                    <input type="hidden" id="machine-id" name="machine-id">
-                    <div class="form-group">
-                        <label for="machine-name">Machine Name:</label>
-                        <input type="text" id="machine-name" name="machine-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="machine-type">Type:</label>
-                        <input type="text" id="machine-type" name="machine-type" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="machine-status">Status:</label>
-                        <select id="machine-status" name="machine-status">
-                            <option value="active">Active</option>
-                            <option value="maintenance">Maintenance</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="submit-button">Save Machine</button>
-                    <button type="button" class="cancel-button" id="machine-form-cancel">Cancel</button>
-                </form>
+    <div class="form-container">
+        <h2 id="machine-form-title">Add New Machine</h2>
+        <form id="machineForm">
+            <input type="hidden" id="machine-id" name="machine-id">
+            
+            <div class="form-group">
+                <label for="machine-name">Machine Name:</label>
+                <input type="text" id="machine-name" name="machine_name" required maxlength="50">
             </div>
-        </section>
+
+            <div class="form-group">
+                <label for="temperature">Temperature:</label>
+                <input type="number" id="temperature" name="temperature" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pressure">Pressure:</label>
+                <input type="number" id="pressure" name="pressure" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="vibration">Vibration:</label>
+                <input type="number" id="vibration" name="vibration" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="humidity">Humidity:</label>
+                <input type="number" id="humidity" name="humidity" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="power-consumption">Power Consumption:</label>
+                <input type="number" id="power-consumption" name="power_consumption" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="operational-status">Operational Status:</label>
+                <select id="operational-status" name="operational_status" required>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="error-code">Error Code:</label>
+                <input type="text" id="error-code" name="error_code" maxlength="20">
+            </div>
+
+            <div class="form-group">
+                <label for="production-count">Production Count:</label>
+                <input type="number" id="production-count" name="production_count">
+            </div>
+
+            <div class="form-group">
+                <label for="maintenance-log">Maintenance Log:</label>
+                <textarea id="maintenance-log" name="maintenance_log" maxlength="255"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="speed">Speed:</label>
+                <input type="number" id="speed" name="speed" step="0.01" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-button">Save Machine</button>
+                <button type="button" class="cancel-button" id="machine-form-cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</section>
 
         <!-- Jobs Management Page -->
         <section class="display-page" id="jobs-management-page" style="display:none">
