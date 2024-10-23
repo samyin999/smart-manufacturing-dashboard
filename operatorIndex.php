@@ -71,13 +71,13 @@ try {
                     <a href="main.php"><button class="switch-user-button">Different User</button></a>
                     <button class="login-button" id="login-button">Login</button>
                 </div> -->
-                <form id="passwordForm" method="POST" action="passwordChecker.php"> 
-                    <input class="user-password-login" type="password" id="userPasswordLogin" name="userPasswordLogin" placeholder="Enter Password" required/>
+                <form id="passwordForm" method="POST" action="passwordChecker.php">
+                    <input class="user-password-login" type="password" id="userPasswordLogin" name="userPasswordLogin" placeholder="Enter Password" required />
                     <br><br><br>
-                        <div class="login-inline">
-                            <a href="main.php"><button type="button" class="switch-user-button">Different User</button></a>
-                            <button type="submit" class="login-button" id="login-button">Login</button> 
-                        </div>
+                    <div class="login-inline">
+                        <a href="main.php"><button type="button" class="switch-user-button">Different User</button></a>
+                        <button type="submit" class="login-button" id="login-button">Login</button>
+                    </div>
                 </form>
             </div>
         </section>
@@ -141,19 +141,21 @@ try {
                 <?php
                 if (!empty($jobs)) {
                     foreach ($jobs as $job) { ?>
-                        <ul class="job-pointer">
-                            Job: <?php echo $job['name']; ?>
-                            <span class="job-status">
-                                (<?php echo $job['status']; ?>)
-                            </span>
-                        </ul>
+                        <form method="post" action="">
+                            <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>">
+                            <button type="submit" name="view_job" class="job-pointer">
+                                Job: <?php echo $job['name']; ?>
+                                <span class="job-status">
+                                    (<?php echo $job['status']; ?>)
+                                </span>
+                            </button>
+                        </form>
                 <?php }
                 } else {
                     echo "<p>No jobs found</p>";
                 }
                 ?>
             </div>
-
             <br>
             <div><button class="footer-button" id="jobs-page-back">Back</button></div>
         </section>
