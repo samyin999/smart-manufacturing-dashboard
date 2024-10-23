@@ -1,7 +1,7 @@
 <?php
 session_start();
 //WIP
-$_SESSION['employeeID'] = 1;  
+$_SESSION['employeeID'] = 1;
 
 // Include database connection
 require_once 'includes/db_connect.php';
@@ -85,7 +85,7 @@ function h($string)
                     <li>Temperature nominal</li>
                 </ul>
             </div>
-            
+
             <br><br>
 
             <button class="rounded-button" id="database-button">User database GUI</button>
@@ -93,7 +93,7 @@ function h($string)
         </section>
 
         <!-- page 2 database -->
-        <section class="display-page" id="show-admin-database" style="display:none">
+        <section class="display-page" id="database-page" style="display:none">
             <h2>User Database</h2>
             <table>
                 <thead>
@@ -117,6 +117,100 @@ function h($string)
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <button class="footer-button database-buttons" id="add-user-button">Add</button>
+            <button class="footer-button database-buttons" id="delete-user-button">Delete</button>
+
+            <br><br>
+
+            <div><button class="footer-button" id="database-page-back">Back</button></div>
+
+        </section>
+
+        <!-- add new user -->
+
+        <section class="display-page" id="add-user-page" style="display:none">
+            <div class="user-form-container">
+                <h2 class="user-form-title">Add New User</h2>
+
+                <form id="addUserForm" class="user-form">
+                    <div class="user-form-group">
+                        <label class="user-form-label">Name<span class="user-form-required">*</span></label>
+                        <input type="text" name="name" class="user-form-input" required>
+                    </div>
+
+                    <div class="user-form-group">
+                        <label class="user-form-label">Role<span class="user-form-required">*</span></label>
+                        <select name="role" class="user-form-select" required>
+                            <option value="">Select a role</option>
+                            <option value="admin">Admin</option>
+                            <option value="manager">Manager</option>
+                            <option value="auditor">Auditor</option>
+                            <option value="operator">Operator</option>
+                        </select>
+                    </div>
+
+                    <div class="user-form-group">
+                        <label class="user-form-label">Job Title</label>
+                        <input type="text" name="job" class="user-form-input">
+                    </div>
+
+                    <div class="user-form-group">
+                        <label class="user-form-label">Description</label>
+                        <textarea name="description" class="user-form-textarea"></textarea>
+                    </div>
+
+                    <button type="submit" class="user-form-submit">Add User</button>
+
+                    <button type="submit" class="user-form-submit" id="add-user-cancel">Cancel</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- delete user -->
+
+        <section class="display-page" id="delete-user-page" style="display:none">
+            <div class="delete-user-container">
+                <h2 class="delete-user-title">Delete Users</h2>
+                <p class="delete-user-instruction">Select the users you want to delete:</p>
+
+                <table class="delete-user-table">
+                    <thead>
+                        <tr>
+                            <th class="delete-user-th delete-user-checkbox-col">
+                                <input type="checkbox" id="selectAll" class="delete-user-checkbox">
+                            </th>
+                            <th class="delete-user-th">ID</th>
+                            <th class="delete-user-th">Name</th>
+                            <th class="delete-user-th">Role</th>
+                            <th class="delete-user-th">Job</th>
+                            <th class="delete-user-th">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($users as $user): ?>
+                            <tr class="delete-user-tr">
+                                <td class="delete-user-td delete-user-checkbox-col">
+                                    <input type="checkbox" name="selectedUsers[]"
+                                        value="<?php echo h($user['user_id']); ?>"
+                                        class="delete-user-checkbox">
+                                </td>
+                                <td class="delete-user-td"><?php echo h($user['user_id']); ?></td>
+                                <td class="delete-user-td"><?php echo h($user['name']); ?></td>
+                                <td class="delete-user-td"><?php echo h($user['role']); ?></td>
+                                <td class="delete-user-td"><?php echo h($user['job']); ?></td>
+                                <td class="delete-user-td"><?php echo h($user['description']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+                <div class="delete-user-actions">
+                    <!-- doesn't do anything, need implementation -->
+                    <button id="" class="delete-user-button delete-user-confirm">Delete Selected</button>
+
+                    <button id="delete-user-cancel" class="delete-user-button">Cancel</button>
+                </div>
+            </div>
         </section>
 
     </main>

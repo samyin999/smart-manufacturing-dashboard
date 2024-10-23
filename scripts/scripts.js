@@ -157,14 +157,28 @@ document.addEventListener('DOMContentLoaded', function(){
         //borrowed logic from Pete's implementation
         const displayMain = document.getElementById('main-page');
         const displayMainNav = document.getElementById('primary-nav-container');
-        const displayFooter = document.getElementById('footer-container');
 
         console.log(`Found Document ${window.location.pathname}`);
         
         // Sam's implementation
+        
+        // pages
+        const landingPage = document.getElementById('landing-page');
+        const databasePage = document.getElementById('database-page');
+        const addUserPage = document.getElementById('add-user-page');
+        const deleteUserPage = document.getElementById('delete-user-page');
 
-        const displayLanding = document.getElementById('landing-page');
-        const displayDatabase = document.getElementById('show-admin-database');
+        // buttons
+        const displayDatabase = document.getElementById('database-button');
+        const addUser = document.getElementById('add-user-button');
+        const deleteUser = document.getElementById('delete-user-button');
+        
+        // back buttons
+        const databasePageBack = document.getElementById('database-page-back');
+        const addUserCancel = document.getElementById('add-user-cancel');
+        const deleteUserCancel = document.getElementById('delete-user-cancel');
+
+
 
         document.getElementById('login-button').addEventListener('click', function(){
             //AND CHECK WITH DATABASE IF PASSWORD===PASSWORD
@@ -172,14 +186,33 @@ document.addEventListener('DOMContentLoaded', function(){
             const username=document.getElementById('user-name-login').textContent;
             document.getElementById('nav-title').textContent=`Production Operator : ${username}`;
 
-            displayLanding.style.display='block';
+            landingPage.style.display='block';
             displayMainNav.style.display='block';
-            displayFooter.style.display='block';
         })
 
-        document.getElementById('database-button').addEventListener('click', function(){
-            displayLanding.style.display='none';
-            displayDatabase.style.display='block';
+        displayDatabase.addEventListener('click', function(){
+            landingPage.style.display='none';
+            databasePage.style.display='block';
+        });
+        databasePageBack.addEventListener('click', function(){
+            databasePage.style.display='none';
+            landingPage.style.display='block';
+        });
+        addUser.addEventListener('click', function(){
+            databasePage.style.display='none';
+            addUserPage.style.display='block';
+        });
+        deleteUser.addEventListener('click', function(){
+            databasePage.style.display='none';
+            deleteUserPage.style.display='block';
+        });
+        addUserCancel.addEventListener('click', function(){
+            addUserPage.style.display='none';
+            databasePage.style.display='block';
+        });
+        deleteUserCancel.addEventListener('click', function(){
+            deleteUserPage.style.display='none';
+            databasePage.style.display='block';
         });
 
     }
