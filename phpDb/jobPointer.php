@@ -2,7 +2,7 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['selectedJob'])) {
     $selectedJobId = $_POST['selectedJob']; 
-    $conn = mysqli_connect('localhost', 'dbamin', '', 'smart_manufacturing');
+    $conn = mysqli_connect('localhost', 'root', '', 'smart_manufacturing');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }

@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli('localhost', 'dbadmin', '', 'smart_manufacturing');
+$conn = new mysqli('localhost', 'root', '', 'smart_manufacturing');
 
 // Check connection
 if ($conn->connect_error) {
@@ -23,6 +23,7 @@ if ($stmt) {
     // Execute the statement
     if ($stmt->execute()) {
         echo "success";
+        
     } else {
         echo "Error updating job: " . $stmt->error;
     }

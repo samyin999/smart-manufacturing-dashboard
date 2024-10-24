@@ -5,6 +5,7 @@ USE smart_manufacturing;
 CREATE TABLE IF NOT EXISTS `users` (
     `user_id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(100) NOT NULL,
+    `password` varchar(255) NOT NULL,
     `role` enum('admin', 'manager', 'auditor', 'operator') NOT NULL,
     `job` varchar(100) DEFAULT NULL,
     `description` text DEFAULT NULL,
@@ -39,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   FOREIGN KEY (`operator`) REFERENCES users(`user_id`),
   FOREIGN KEY (`machine`) REFERENCES machines(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 INSERT INTO `users` (`name`, `role`, `job`, `description`)
 VALUES 

@@ -2,7 +2,7 @@
 require_once 'includes/db_connect.php';
 session_start();
 
-$receivedID = 1; 
+$receivedID = 1;
 // for demo purposes 1=bob manager, 2=rajit operator, 3=john auditor, 4=john admin
 
 $_SESSION['employeeId'] = $receivedID;
@@ -59,17 +59,17 @@ try {
         </section> -->
 
         <section class="display-page" id="main-page" style="display:block">
-    <div class="login-prompt">
-        <h2 id="user-name-login">
-            <?php echo $name; ?>
-        </h2>
-        <input class="user-password-login" type="password" placeholder="Enter Password" />
-        <div class="login-inline">
-            <a href="main.php"><button type="button" class="switch-user-button">Different User</button></a>
-            <button type="button" class="login-button" id="login-button">Login</button>
-        </div>
-    </div>
-</section>
+            <div class="login-prompt">
+                <h2 id="user-name-login">
+                    <?php echo $name; ?>
+                </h2>
+                <input class="user-password-login" type="password" placeholder="Enter Password" />
+                <div class="login-inline">
+                    <a href="main.php"><button type="button" class="switch-user-button">Different User</button></a>
+                    <button type="button" class="login-button" id="login-button">Login</button>
+                </div>
+            </div>
+        </section>
 
         <!-- Navigation Bar -->
         <nav class="primary-nav" id="primary-nav-container" style="display:none">
@@ -88,7 +88,7 @@ try {
                 <h3>Company notices: </h3>
                 <h4>Fire drill today at 3:00PM ACST</h4>
             </div>
-            <div class="middle-container">
+            <div class="middle-container" id="manager-middle-container">
                 <div><a class="operator-task-icons" id="show-performance"><img src="images/performance.png" alt="performance-icon">Monitor Factory Performance</a></div>
                 <div><a class="operator-task-icons" id="show-machines-management"><img src="images/machine.png" alt="machine-icon">Manage Machines</a></div>
                 <div><a class="operator-task-icons" id="show-jobs-management"><img src="images/suitcase.png" alt="jobs-icon">Manage Jobs</a></div>
@@ -130,76 +130,76 @@ try {
 
         <!-- Add/Edit Machine Form -->
         <section class="display-page" id="machine-form-page" style="display:none">
-    <div class="form-container">
-        <h2 id="machine-form-title">Add New Machine</h2>
-        <form id="machineForm">
-            <input type="hidden" id="machine-id" name="machine-id">
-            
-            <div class="form-group">
-                <label for="machine-name">Machine Name:</label>
-                <input type="text" id="machine-name" name="machine_name" required maxlength="50">
-            </div>
+            <div class="form-container">
+                <h2 id="machine-form-title">Add New Machine</h2>
+                <form id="machineForm">
+                    <input type="hidden" id="machine-id" name="machine-id">
 
-            <div class="form-group">
-                <label for="temperature">Temperature:</label>
-                <input type="number" id="temperature" name="temperature" step="0.01" required>
-            </div>
+                    <div class="form-group">
+                        <label for="machine-name">Machine Name:</label>
+                        <input type="text" id="machine-name" name="machine_name" required maxlength="50">
+                    </div>
 
-            <div class="form-group">
-                <label for="pressure">Pressure:</label>
-                <input type="number" id="pressure" name="pressure" step="0.01" required>
-            </div>
+                    <div class="form-group">
+                        <label for="temperature">Temperature:</label>
+                        <input type="number" id="temperature" name="temperature" step="0.01" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="vibration">Vibration:</label>
-                <input type="number" id="vibration" name="vibration" step="0.01" required>
-            </div>
+                    <div class="form-group">
+                        <label for="pressure">Pressure:</label>
+                        <input type="number" id="pressure" name="pressure" step="0.01" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="humidity">Humidity:</label>
-                <input type="number" id="humidity" name="humidity" step="0.01" required>
-            </div>
+                    <div class="form-group">
+                        <label for="vibration">Vibration:</label>
+                        <input type="number" id="vibration" name="vibration" step="0.01" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="power-consumption">Power Consumption:</label>
-                <input type="number" id="power-consumption" name="power_consumption" step="0.01" required>
-            </div>
+                    <div class="form-group">
+                        <label for="humidity">Humidity:</label>
+                        <input type="number" id="humidity" name="humidity" step="0.01" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="operational-status">Operational Status:</label>
-                <select id="operational-status" name="operational_status" required>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                </select>
-            </div>
+                    <div class="form-group">
+                        <label for="power-consumption">Power Consumption:</label>
+                        <input type="number" id="power-consumption" name="power_consumption" step="0.01" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="error-code">Error Code:</label>
-                <input type="text" id="error-code" name="error_code" maxlength="20">
-            </div>
+                    <div class="form-group">
+                        <label for="operational-status">Operational Status:</label>
+                        <select id="operational-status" name="operational_status" required>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
 
-            <div class="form-group">
-                <label for="production-count">Production Count:</label>
-                <input type="number" id="production-count" name="production_count">
-            </div>
+                    <div class="form-group">
+                        <label for="error-code">Error Code:</label>
+                        <input type="text" id="error-code" name="error_code" maxlength="20">
+                    </div>
 
-            <div class="form-group">
-                <label for="maintenance-log">Maintenance Log:</label>
-                <textarea id="maintenance-log" name="maintenance_log" maxlength="255"></textarea>
-            </div>
+                    <div class="form-group">
+                        <label for="production-count">Production Count:</label>
+                        <input type="number" id="production-count" name="production_count">
+                    </div>
 
-            <div class="form-group">
-                <label for="speed">Speed:</label>
-                <input type="number" id="speed" name="speed" step="0.01" required>
-            </div>
+                    <div class="form-group">
+                        <label for="maintenance-log">Maintenance Log:</label>
+                        <textarea id="maintenance-log" name="maintenance_log" maxlength="255"></textarea>
+                    </div>
 
-            <div class="form-actions">
-                <button type="submit" class="submit-button">Save Machine</button>
-                <button type="button" class="cancel-button" id="machine-form-cancel">Cancel</button>
+                    <div class="form-group">
+                        <label for="speed">Speed:</label>
+                        <input type="number" id="speed" name="speed" step="0.01" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-button">Save Machine</button>
+                        <button type="button" class="cancel-button" id="machine-form-cancel">Cancel</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</section>
+        </section>
 
         <!-- Jobs Management Page -->
         <section class="display-page" id="jobs-management-page" style="display:none">
@@ -226,30 +226,58 @@ try {
             <button class="footer-button" id="jobs-management-back">Back</button>
         </section>
 
-        <!-- Add/Edit Job Form -->
+        <!-- Add/Edit Job Form editC -->
         <section class="display-page" id="job-form-page" style="display:none">
             <div class="form-container">
                 <h2 id="job-form-title">Add New Job</h2>
                 <form id="jobForm">
                     <input type="hidden" id="job-id" name="job-id">
+
                     <div class="form-group">
                         <label for="job-name">Job Name:</label>
-                        <input type="text" id="job-name" name="job-name" required>
+                        <input type="text" id="job-name" name="name" required maxlength="100">
                     </div>
-                    <div class="form-group">
-                        <label for="job-description">Description:</label>
-                        <textarea id="job-description" name="job-description" required></textarea>
-                    </div>
+
                     <div class="form-group">
                         <label for="job-status">Status:</label>
-                        <select id="job-status" name="job-status">
-                            <option value="pending">Pending</option>
-                            <option value="in-progress">In Progress</option>
-                            <option value="completed">Completed</option>
+                        <select id="job-status" name="status" required>
+                            <option value="queued">Queued</option>
+                            <option value="progress">In Progress</option>
+                            <option value="finished">Finished</option>
                         </select>
                     </div>
-                    <button type="submit" class="submit-button">Save Job</button>
-                    <button type="button" class="cancel-button" id="job-form-cancel">Cancel</button>
+
+                    <div class="form-group">
+                        <label for="job-notes">Notes:</label>
+                        <textarea id="job-notes" name="notes"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job-operator">Operator:</label>
+                        <select id="job-operator" name="operator" required>
+                            <?php foreach ($operators as $operator): ?>
+                                <option value="<?php echo $operator['user_id']; ?>">
+                                    <?php echo htmlspecialchars($operator['name']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job-machine">Machine:</label>
+                        <select id="job-machine" name="machine" required>
+                            <?php foreach ($machines as $machine): ?>
+                                <option value="<?php echo $machine['id']; ?>">
+                                    <?php echo htmlspecialchars($machine['machine_name']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-button">Save Job</button>
+                        <button type="button" class="cancel-button" id="job-form-cancel">Cancel</button>
+                    </div>
                 </form>
             </div>
         </section>
@@ -316,7 +344,7 @@ try {
         </footer>
     </main>
 
-    <script type="text/javascript" src="scripts/scripts.js"></script>
+    <script type="text/javascript" src="scripts/manager_scripts.js"></script>
 </body>
 
 </html>

@@ -5,11 +5,31 @@ require_once 'includes/db_connect.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Pete's code, commented out code = doesn't work
 session_start();
 
+// $conn = mysqli_connect('localhost', 'dbamin', '', 'productiondb');
+// if (!$conn) {
+//     die("Connection failed: " . mysqli_connect_error());
+// }
 
-$receivedID = 2; 
+$receivedID = 2; #NOTE THIS MUST BE RECEIVED AND BE pre-PROCESSED TO ENSURE NO INJECTION ATTACKS
+
+// for demo purposes 1=bob manager, 2=rajit operator, 3=john auditor, 4=john admin
+
 $_SESSION['employeeOpId'] = $receivedID;
+
+// $name = "SELECT name FROM users WHERE user_id=$receivedID;";
+// $result = mysqli_query($conn, $name);
+// $row = mysqli_fetch_assoc($result);
+// $fullName = ($row['name'] . ' ' . $row['lastName']);
+
+// $jobQueryStmt = $conn->prepare("SELECT jobID, jobName, jobNote, jobStatus FROM jobList WHERE employeeID = ?");
+// $jobQueryStmt->bind_param("i", $receivedID);
+// $jobQueryStmt->execute();
+// $jobResult = $jobQueryStmt->get_result();
+
+// Below is what ended up working for me
 
 $stmt = $pdo->prepare("SELECT name FROM users WHERE user_id = ?");
 $stmt->execute([$receivedID]);
