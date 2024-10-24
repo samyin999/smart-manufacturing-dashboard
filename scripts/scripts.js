@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         // Pages
         const realJobPage = document.getElementById('real-job-page');
+        const currentJobPage= document.getElementById('current-job-page');
         const landingPage = document.getElementById('landing-page');
         const performancePage = document.getElementById('performance-page');
         const machinesPage = document.getElementById('machines-page');
@@ -25,6 +26,10 @@ document.addEventListener('DOMContentLoaded', function(){
         const jobsPageBack = document.getElementById('jobs-page-back');
         const machinesPageBack = document.getElementById('machines-page-back');
         const currentMachineBack = document.getElementById('current-machine-back');
+
+        const queued = document.getElementById("queued");
+        const progress = document.getElementById("progress");
+        const completed= document.getElementById("completed");
         
         // forwards navigation
         displayJobs.addEventListener('click', function(){
@@ -76,13 +81,97 @@ document.addEventListener('DOMContentLoaded', function(){
         const section = document.querySelectorAll('.display-page');
         let pageCounter =0;
 
+
         document.getElementById('login-button').addEventListener('click', function(){
+            console.log("Form submitted");
+            
+            var userPassword = document.getElementById('userPasswordLogin').value;
+            console.log("Password entered:", userPassword);
+        
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'phpDb/passwordChecker.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            
+            xhr.onreadystatechange = function() {
+                console.log('detected a change in the system');
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = xhr.responseText.trim();
+                    if (response === 'correct') {
+                        displayMain.style.display='none';
+                        const username=document.getElementById('user-name-login').textContent;
+                        document.getElementById('nav-title').textContent=`Production Operator : ${username}`;
+                        pageTransition(1,0,0);
+                    } else if (response == 'incorrect') {
+                        alert("Incorrect password");
+                    } else if (response == 'notfound') {
+                        alert("Employee ID not found.");
+                    } else {
+                        console.log("Unexpected response: " + response);
+                    }
+                }
+            };
+            xhr.send('userPasswordLogin=' + userPassword + '&userRole=' + "operator");
+
             //AND CHECK WITH DATABASE IF PASSWORD===PASSWORD
-            displayMain.style.display='none';
-            const username=document.getElementById('user-name-login').textContent;
-            document.getElementById('nav-title').textContent=`Production Operator : ${username}`;
-            pageTransition(1,0,0);
-        })
+            
+        });
+        let jobID=0;
+        let employeeID=0;
+        
+        document.querySelectorAll('.job-pointer-container').forEach(function(jobPointer){
+            jobPointer.addEventListener('submit', function(event) {
+                event.preventDefault();
+                console.log("Job submitted");
+                var form = event.target.querySelector('button');
+                var selectedJob = form.value.trim();
+                console.log(selectedJob);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'phpDb/jobPointer.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                
+                xhr.onreadystatechange = function() {
+                    console.log('detected a change in the system');
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = xhr.responseText.trim();
+                        var responseArray = response.split(",");
+                        jobID = responseArray[3];
+                        employeeID = responseArray[4];
+                        console.log('Full response: ' + response);
+                        console.log('Job Name: ' + responseArray[0]); // jobName
+                        console.log('Job Status: ' + responseArray[1]); // jobStatus
+                        console.log('Job Note: ' + responseArray[2]); // jobNote
+                        console.log('Updated job id and employee id to: ' + jobID + ", " + employeeID);
+                        jobDetails(responseArray[1],responseArray[2]);
+
+                        document.getElementById('current-job-text').textContent=responseArray[0];
+                        console.log("Response by system is"+response);
+                    }
+                };
+                console.log('selectedJob=' + selectedJob);
+                xhr.send('selectedJob=' + selectedJob);
+            });
+        });
+        function jobDetails(status, note){
+            if(status == "queued"){
+                queued.checked=true;
+                progress.checked=false;
+                completed.checked=false;
+            }else if(status == "progress"){
+                queued.checked=true;
+                progress.checked=true;
+                completed.checked=false;
+            }else if(status == "completed"){
+                queued.checked=true;
+                progress.checked=true;
+                completed.checked=true;
+            }
+            realJobPage.style.display="none";
+            currentJobPage.style.display="block";
+            displayFooterBack.style.display="block";
+            displayFooterUpdate.style.display="block";
+            document.getElementById('form-notes').value=note;
+        };
+    
 
         // document.querySelectorAll('.attribute-container').forEach(function(button){
         //     button.addEventListener('click', function(event){
@@ -109,7 +198,53 @@ document.addEventListener('DOMContentLoaded', function(){
         // displayFooterBack.addEventListener('click',function(){
         //     pageTransition(0,1,0);
         // });
+        displayFooterHelp.addEventListener('click', function(){
+            const helpOverlay = document.getElementById('help-overlay-container');
+            helpOverlay.style.display='flex';
+            document.getElementById('close-help').addEventListener('click', function(){
+                helpOverlay.style.display='none';
+            });
+            
+        });
+        console.log("Do we even get to here test");
+        displayFooterUpdate.addEventListener('click', function(){
+            console.log("Footer update has been clickedf");
+            let latestStatus = "";
+            if(queued.checked){
+                latestStatus="queued";
+            }
+            if(progress.checked){
+                latestStatus="progress";
+            }
+            if(completed.checked){
+                latestStatus="completed";
+            }
+            var latestNotes = document.getElementById('form-notes').value;
+            updateJob(latestStatus, latestNotes);
+        });
+        function updateJob(latestStatus, latestNotes) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "phpDb/updateJob.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            console.log("Before processing data to be sent latestStatus is: "+latestStatus +"\njobID is "+jobID);
+            // Create the data string to send
+            var data = "jobStatus=" + encodeURIComponent(latestStatus) +
+                       "&jobNotes=" + encodeURIComponent(latestNotes) +
+                       "&jobID=" + encodeURIComponent(jobID) +
+                       "&employeeID=" + encodeURIComponent(employeeID); // Ensure employeeID is defined
+            
 
+            console.log(data);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("Update response:", xhr.responseText);
+                    // Handle response here, e.g., display a success message
+                }
+            };
+        
+            // Send the request with the data
+            xhr.send(data);
+        }
         function pageTransition(page, back, update){
             displayMainNav.style.display='block';
             displayFooter.style.display='block';
@@ -182,12 +317,38 @@ document.addEventListener('DOMContentLoaded', function(){
 
         document.getElementById('login-button').addEventListener('click', function(){
             //AND CHECK WITH DATABASE IF PASSWORD===PASSWORD
-            displayMain.style.display='none';
-            const username=document.getElementById('user-name-login').textContent;
-            document.getElementById('nav-title').textContent=`Production Operator : ${username}`;
+            console.log("Form submitted");
+            
+            var userPassword = document.getElementById('userPasswordLogin').value;
+            console.log("Password entered:", userPassword);
+        
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'phpDb/passwordChecker.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            
+            xhr.onreadystatechange = function() {
+                console.log('detected a change in the system');
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = xhr.responseText.trim();
+                    if (response === 'correct') {
+                        displayMain.style.display='none';
+                    const username=document.getElementById('user-name-login').textContent;
+                    document.getElementById('nav-title').textContent=`Production Operator : ${username}`;
 
-            landingPage.style.display='block';
-            displayMainNav.style.display='block';
+                    landingPage.style.display='block';
+                    displayMainNav.style.display='block';
+                    } else if (response == 'incorrect') {
+                        alert("Incorrect password");
+                    } else if (response == 'notfound') {
+                        alert("Employee ID not found.");
+                    } else {
+                        console.log("Unexpected response: " + response);
+                    }
+                }
+            };
+            xhr.send('userPasswordLogin=' + userPassword + '&userRole=' + "admin");
+
+            
         })
 
         displayDatabase.addEventListener('click', function(){
@@ -214,6 +375,67 @@ document.addEventListener('DOMContentLoaded', function(){
             deleteUserPage.style.display='none';
             databasePage.style.display='block';
         });
+        //JAVASCRIPT TO HANDLE PAGE REFRESH WHEN FORM SUBMITTED AND OTHER FORMS
+    const addUserForm  =document.getElementById('addUserForm');
+
+    document.getElementById('refresh-user-list').addEventListener('click', function() {
+        // Fetch updated user list via AJAX
+        fetch('./phpDb/getUsers.php')
+            .then(response => response.text())
+            .then(data => {
+                // Replace the content inside the user table body
+                document.getElementById('userTableBody').innerHTML = data;
+            })
+            .catch(error => console.error('Error fetching user list:', error));
+    });
+    
+    document.getElementById('delete-user-confirm').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form submission if any
+        
+        // Get all checked checkboxes
+        let checkboxes = document.querySelectorAll('input[name="selectedUsers[]"]:checked');
+        
+        // Array to hold the selected user IDs
+        let selectedUserIds = [];
+        
+        // Loop through the checkboxes and collect the user IDs
+        checkboxes.forEach(function(checkbox) {
+            selectedUserIds.push(checkbox.value);
+        });
+        console.log('"Within delete user upon click');
+        if (selectedUserIds.length > 0) {
+            // Now you have an array of selected user IDs (selectedUserIds)
+            // For now, we can just log them to the console to check
+            console.log('Selected User IDs:', selectedUserIds);
+
+                deleteUsers(selectedUserIds);
+            
+        } else {
+            alert("No users selected for deletion.");
+        }
+    });
+    
+    // Function to send selected user IDs to the server for deletion
+    function deleteUsers(userIds) {
+        // Create a form dynamically to submit via POST
+        let form = document.createElement('form');
+        form.method = 'POST';
+        form.action = './phpDb/deleteUsers.php';  // The PHP script that handles deletion
+        
+        console.log("Within deleteUsers function");
+        // Add user IDs as hidden input fields
+        userIds.forEach(function(userId) {
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'userIds[]'; // Array of user IDs
+            input.value = userId;
+            form.appendChild(input);
+        });
+        
+        // Append the form to the body and submit it
+        document.body.appendChild(form);
+        form.submit();
+    }
 
     }
 
@@ -555,8 +777,15 @@ document.getElementById('machineForm').addEventListener('submit', function(e) {
             });
         });
     }
+
+
+    
+
+
 });
 
-// Ajay's Javascript
+
+
+
 
 

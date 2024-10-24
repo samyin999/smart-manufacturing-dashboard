@@ -17,7 +17,7 @@ $receivedID = 2; #NOTE THIS MUST BE RECEIVED AND BE pre-PROCESSED TO ENSURE NO I
 
 // for demo purposes 1=bob manager, 2=rajit operator, 3=john auditor, 4=john admin
 
-$_SESSION['employeeId'] = $receivedID;
+$_SESSION['employeeOpId'] = $receivedID;
 
 // $name = "SELECT name FROM users WHERE user_id=$receivedID;";
 // $result = mysqli_query($conn, $name);
@@ -74,14 +74,12 @@ try {
                     <a href="main.php"><button class="switch-user-button">Different User</button></a>
                     <button class="login-button" id="login-button">Login</button>
                 </div> -->
-                <form id="passwordForm" method="POST" action="passwordChecker.php">
-                    <input class="user-password-login" type="password" id="userPasswordLogin" name="userPasswordLogin" placeholder="Enter Password" required />
-                    <br><br><br>
-                    <div class="login-inline">
-                        <a href="main.php"><button type="button" class="switch-user-button">Different User</button></a>
-                        <button type="submit" class="login-button" id="login-button">Login</button>
-                    </div>
-                </form>
+                <input class="user-password-login" type="form" id="userPasswordLogin" name="userPasswordLogin" placeholder="Enter Password" /><!--Check with database for correct entry-->
+                <div class="login-inline">
+                    <a href="main.php"><button class="switch-user-button">Different
+                            User</button></a><!--TODO LINK TO MAIN-PAGE-->
+                    <button class="login-button" id="login-button">Login</button>
+                </div>
             </div>
         </section>
 
@@ -141,24 +139,23 @@ try {
         <section class="display-page" id="real-job-page" style="display:none">
             <h2>Jobs Database</h2>
             <div class="x-track">
-                <?php
-                if (!empty($jobs)) {
-                    foreach ($jobs as $job) { ?>
-                        <form method="post" action="">
-                            <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>">
-                            <button type="submit" name="view_job" class="job-pointer">
-                                Job: <?php echo $job['name']; ?>
-                                <span class="job-status">
-                                    (<?php echo $job['status']; ?>)
-                                </span>
-                            </button>
-                        </form>
-                <?php }
-                } else {
-                    echo "<p>No jobs found</p>";
-                }
-                ?>
-            </div>
+    <?php
+    if (!empty($jobs)) {
+        foreach ($jobs as $job) {
+            // Create a form for each job
+            echo "<form class='job-pointer-container' method='post' action=''>";
+            echo "<button type='submit' name='view_job' class='job-pointer' value='" . htmlspecialchars($job['id']) . "'>";
+            echo "Job: " . htmlspecialchars($job['name']) . " ";
+            echo "<span class='job-status'>(" . htmlspecialchars($job['status']) . ")</span>";
+            echo "</button>";
+            echo "</form>";
+        }
+    } else {
+        echo "<button class='job-pointer'>No Jobs found</button>";
+    }
+    ?>
+</div>
+
             <br>
             <div><button class="footer-button" id="jobs-page-back">Back</button></div>
         </section>
@@ -193,7 +190,7 @@ try {
                 </div>
                 <div id="right-job-container">
                     <h4>Notes:</h4> <!--Data to be submitted to database, and allow the update button to be functional-->
-                    <input type="form" name="submitNotes" placeholder="Enter any additional information regarding the job, including issues, requests, and further commodities">
+                    <input type="form" id="form-notes" name="submitNotes" placeholder="Enter any additional information regarding the job, including issues, requests, and further commodities">
                 </div>
 
 
